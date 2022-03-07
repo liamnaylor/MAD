@@ -58,7 +58,7 @@ class ProfileScreen extends Component{
           console.log("Picture added", response);
       })
       .catch((err) => {
-          console.log(err);
+          console.log('I am sorry, there is an issue with the image you are attempting to upload.',err);
       })
   }
 

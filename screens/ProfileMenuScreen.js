@@ -13,6 +13,30 @@ class ProfileScreenMenu extends Component{
         }
     }
 
+    logout = async () => {
+        let token = await AsyncStorage.getItem('@session_token');
+        await AsyncStorage.removeItem('@session_token');
+        return fetch("http://localhost:3333/api/1.0.0/logout", {
+            method: 'POST',
+            headers: {
+                "X-Authorization": token
+            }
+        })
+        .then((response) => {
+            if(response.status === 200){
+                this.props.navigation.navigate("Login");
+            }else if(response.status === 401){
+                this.props.navigation.navigate("Login");
+            }else{
+                throw 'Something went wrong';
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            ToastAndroid.show(error, ToastAndroid.SHORT);
+        })
+    }
+
     checkLoggedIn = async () => {
         const value = await AsyncStorage.getItem('@session_token');
         if(value !== null) {
@@ -146,10 +170,8 @@ class ProfileScreenMenu extends Component{
                                 data={this.state.userDetails}
                                 renderItem={({item})=>(
                                     <View>
-                                        <Text>{item.user_id}</Text>
                                         <Text>{item.first_name}</Text>
-                                        <Text>{item.last_name}</Text>
-                                        <Text>{item.email}</Text>
+                                        
                                     </View>
                                 )}
                                 keyExtractor={(user,index)=>user.user_id.toString()}

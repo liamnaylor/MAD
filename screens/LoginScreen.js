@@ -85,7 +85,7 @@ class LoginScreen extends Component{
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#fff",
+      backgroundColor: "#E9CDCD",
       alignItems: "center",
       justifyContent: "center",
     },
@@ -113,10 +113,17 @@ const styles = StyleSheet.create({
       flexDirection:"row"
     },
   
-    forgot_button: {
-      height: 30,
-      marginBottom: 30,
-    },
+    regBtn: {
+        width: "80%",
+        height: 50,
+        alignItems: "flex-end",
+        justifyContent: "center",
+        marginTop: 40,
+        borderWidth:10,
+        backgroundColor: "#DDDCA1",
+        flexDirection:"row",
+        
+      },
   
     loginBtn: {
       width: "80%",
@@ -124,14 +131,15 @@ const styles = StyleSheet.create({
       alignItems: "center",
       justifyContent: "center",
       marginTop: 40,
-      backgroundColor: "#9ACD32",
-      flexDirection:"row"
+      backgroundColor: "#DDDCA1",
     },
   
     title: {
       color: "#000",
       fontSize: 30,
-      fontWeight: "bold"
+      fontWeight: "bold",
+      fontFamily:"Sans-Serif",
+      
     },
   });
 

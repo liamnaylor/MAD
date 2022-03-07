@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, Button, Alert,View,TextInput,FlatList, ActivityIndicator } from 'react-native';
+import { Text, ScrollView, Button, Alert,View,TextInput,FlatList, ActivityIndicator,StyleSheet,TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -12,6 +12,30 @@ class PostScreen extends Component{
             allData:[],
             isLoading:true,
         }
+    }
+
+    logout = async () => {
+        let token = await AsyncStorage.getItem('@session_token');
+        await AsyncStorage.removeItem('@session_token');
+        return fetch("http://localhost:3333/api/1.0.0/logout", {
+            method: 'POST',
+            headers: {
+                "X-Authorization": token
+            }
+        })
+        .then((response) => {
+            if(response.status === 200){
+                this.props.navigation.navigate("Login");
+            }else if(response.status === 401){
+                this.props.navigation.navigate("Login");
+            }else{
+                throw 'Something went wrong';
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            ToastAndroid.show(error, ToastAndroid.SHORT);
+        })
     }
 
     postText= async () =>{
@@ -140,13 +164,16 @@ class PostScreen extends Component{
                 <View>
                     <View>
                         <TextInput
+                            style ={styles.textIn}
                             placeholder="Enter text here and press 'Post' to post a message"
                             onChangeText={(text)=> this.setState({text})}
                         />
                         <Button
+                            style={{marginBottom:20}}
                             title="Post"
                             onPress={()=> this.postText()}
                         />
+                        
                         
                     </View>
                     <View>
@@ -154,20 +181,24 @@ class PostScreen extends Component{
                             data={this.state.allData}
                             renderItem={({item})=>(
                                 <View>    
-                                    <Text>{item.text}</Text>
+                                    <Text style = {{marginTop:30, fontWeight:'bold', fontSize:16, fontFamily:"helvetica"}}>{item.text}</Text>
                                     <Text>Likes: {item.numLikes}</Text>
+                                    <Text style={{marginBottom:10}}></Text>
                                     <TextInput 
                                         placeholder="Enter Text here and press 'Submit' to update this post"
                                         onChangeText={(text)=>this.setState({text})}
                                     />
                                     <Button
+                                        style={{marginBottom:10}}
                                         title="Submit Changes"
                                         onPress={()=>this.updatePost(item.post_id)}
                                     />
                                     <Button
+                                        style={{marginTop:20}}
                                         title="Delete Post"
                                         onPress={()=> this.deletePost(item.post_id)}                
                                     />
+                                    <Text style={{marginBottom:40}}></Text>
                                     
                                 </View>
 
@@ -183,6 +214,29 @@ class PostScreen extends Component{
         }
     }
 }
+const styles = StyleSheet.create({
+    container:{
+        borderRadius:20,
+        backgroundColor:'#E9CDCD'
+    },
+    textIn:{
+        borderColor:"light-blue",
+        width:"100",
+        borderWidth:1,
+        borderRadius:10,
+        padding:10,
+        marginBottom:5
+    },
+    button: {
+        width: "80%",
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 40,
+        backgroundColor: "#9ACD32",
+      },
+    
+})
+
 
 export default PostScreen;
-//ds

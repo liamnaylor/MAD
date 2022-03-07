@@ -73,6 +73,7 @@ class HomeScreen extends Component{
         })
         .then((response)=>{
             console.log("Post Liked!",response);
+            this.getOtherUserPosts();
         })
         .catch((error)=>{
             console.error(error);
@@ -159,7 +160,6 @@ class HomeScreen extends Component{
         })
         .then((response)=>{
             console.log('You have a new friend'+response);
-            this.getFriendRequests();
         })
         .catch((error)=>{
             console.error(error);
@@ -264,6 +264,7 @@ class HomeScreen extends Component{
                             onPress={()=> this.props.navigation.navigate("Your Details")}
                         />
                         <Button
+                            style={{marginBottom:20}}
                             title="Post"
                             onPress={()=> this.props.navigation.navigate("Post")}
                         />
@@ -271,7 +272,6 @@ class HomeScreen extends Component{
                     <View>
                         <FlatList
                             data={this.state.friendRequests}
-                            ItemSeparatorComponent={this.ItemSeparator}
                             renderItem={({item})=>(
                                 <View>
                                     <Text>{item.first_name} {item.last_name}</Text>
@@ -292,6 +292,7 @@ class HomeScreen extends Component{
                     <View>
                         <Text style={styles.friendText}>Your Friends</Text>
                         <FlatList
+                            style={styles.posts}
                             data={this.state.friends}
                             ItemSeparatorComponent={this.ItemSeparator}
 
@@ -303,7 +304,7 @@ class HomeScreen extends Component{
                                         title="Get Posts from this user"
                                         onPress={()=>this.getOtherUserPosts(item.user_id, item.post_id)}
                                     />
-                                
+
                                     
                                 </View>
                             )}
@@ -313,12 +314,13 @@ class HomeScreen extends Component{
                     </View>
                     <View style = {styles.container}>
                         <FlatList
-
                             data={this.state.friendPosts}
                             renderItem={({item})=>(
                                 <View>
-                                    <Text>{item.author.first_name} {item.author.last_name} Says - {item.text} </Text>
-                                    <Text>Likes: {item.numLikes}</Text>
+                                    <Text style = {styles.divider}></Text>
+
+                                    <Text style={styles.posts}>{item.author.first_name} {item.author.last_name} Says - {item.text} Likes: {item.numLikes}
+                                    </Text>
                                     <Button
                                         title="Like Post"
                                         onPress={()=>this.likePost(item.author.user_id,item.post_id) }
@@ -327,6 +329,7 @@ class HomeScreen extends Component{
                                         title="Remove Like"
                                         onPress={()=> this.removeLike(item.author.user_id,item.post_id)}
                                     />
+                                    <Text style={styles.divider}></Text>
                                 </View>
                             )}
                             keyExtractor={(user,index)=>user.post_id.toString()}
@@ -346,7 +349,7 @@ class HomeScreen extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#E9CDCD",
         alignItems: "center",
         justifyContent: "center",
       },
@@ -367,21 +370,21 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     
-    loginBtn: {
-        width: "80%",
-        borderRadius: 25,
-        height: 50,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 40,
-        backgroundColor: "#9ACD32",
+    posts:{
+        padding:2,
+        flex:1,
     },
+    
     
     title: {
         color: "#000",
         fontSize: 30,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginTop:20
     },
+    divider: {
+        marginBottom:40
+    }
     
 });
 

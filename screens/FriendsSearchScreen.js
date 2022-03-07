@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
-import { Text, ScrollView, Button, FlatList, View } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import React, { Component, useState,useEffect} from 'react';
+import { Text, ScrollView, Button, FlatList, View,TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SearchBar } from 'react-native-elements';
 
 class FriendSearchScreen extends Component{
     
@@ -9,8 +9,35 @@ class FriendSearchScreen extends Component{
         super(props);
         this.state={
             listData:[],
-            isLoading:true
+            isLoading:true,
+            searchText:'',
+            searchData:[]
         }
+    }
+    
+
+    logout = async () => {
+        let token = await AsyncStorage.getItem('@session_token');
+        await AsyncStorage.removeItem('@session_token');
+        return fetch("http://localhost:3333/api/1.0.0/logout", {
+            method: 'POST',
+            headers: {
+                "X-Authorization": token
+            }
+        })
+        .then((response) => {
+            if(response.status === 200){
+                this.props.navigation.navigate("Login");
+            }else if(response.status === 401){
+                this.props.navigation.navigate("Login");
+            }else{
+                throw 'Something went wrong';
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            ToastAndroid.show(error, ToastAndroid.SHORT);
+        })
     }
     
     findFriends= async()=>{
@@ -83,44 +110,57 @@ class FriendSearchScreen extends Component{
         }
     }
 
-    searchBarFriends=async()=>{
-        const [search,setSearch] = useState('');
-        const [filteredDataSource,setFilteredDataSource]=useState([]);
-        const [masterDataSource,setMasterDataSource]=useState([]);
+    searchBar=async(searchText)=>{
+        this.setState(searchText)
         const token =await AsyncStorage.getItem('@session_token');
         return fetch("http://localhost:3333/api/1.0.0/search",{
             headers:{
-                'X-Authorization':token
+                'X-Authorization':token,
+                'Content-Type':'application/json'
             },
         })
         .then((response)=>response.json())
         .then((responseJson)=>{
-            setFilteredDataSource(responseJson);
-            setMasterDataSource(responseJson);
+            this.setState({
+                searchData:responseJson
+            })
         })
         .catch((error)=>{
             console.error(error);
         })
     }
 
-    searchFilterFunction = (entry) => {
-        if (entry) {
-          
-          const newData = masterDataSource.filter(function (item) {
-            const itemData = item.title
-              ? item.title.toUpperCase()
-              : ''.toUpperCase();
-            const textData = entry.toUpperCase();
-            return itemData.indexOf(textData) > -1;
-          });
-            setFilteredDataSource(newData);
-            setSearch(entry);
-        } 
-        else {
-            setFilteredDataSource(masterDataSource);
-            setSearch(entry);
-        }
+
+
+
+   
+    
+    ItemView = ({item}) => {
+        return (
+          // Flat List Item
+          <Text
+            onPress={() => getItem(item)}>
+            {item.id}
+            {'.'}
+            {item.title.toUpperCase()}
+          </Text>
+        );
       };
+    
+    ItemSeparatorView = () => {
+        return (
+          // Flat List Item Separator
+          <View
+            style={{
+              height: 0.5,
+              width: '100%',
+              backgroundColor: '#C8C8C8',
+            }}
+          />
+        );
+      };
+    
+
     
 
     render(){
@@ -140,15 +180,17 @@ class FriendSearchScreen extends Component{
         else{
             return(
                 <View>
-                    <SearchBar
-                        round
-                        searchIcon={{size:22}}
-                        onChangeText={(entry)=>this.searchFilterFunction(entry)}
-                        onClear={(entry)=>this.searchFilterFunction('')}
-                        placeholder="Find some Friends by typing"
+                    <TextInput
+                        onChangeText={(searchText)=>this.setState({searchText})}
+                        placeholder='Search For Friends Here'
+                        
+                    />
+                    <Button
+                        title='Search'
+                        onPress={(searchText)=>this.searchBar(searchText)}
                     />
                     <FlatList
-                        data={this.state.listData}
+                        data={this.state.searchData}
                         renderItem={({item})=>(
                             <View>
                                 <Text>{item.user_givenname} {item.user_familyname} {item.user_id}</Text>
