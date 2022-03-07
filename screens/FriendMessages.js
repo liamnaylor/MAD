@@ -1,19 +1,19 @@
-import React,{Component} from 'react'
-import{Text} from 'react-native'
+import React, { Component } from 'react'
+import { Text } from 'react-native'
 
-class FriendMessages extends Component{
-    constructor(props){
-        super(props);
+class FriendMessages extends Component {
+  constructor (props) {
+    super(props)
 
-        this.state={}
-    }
+    this.state = {}
+  }
 
-    render(){
-        return(
-            <Text>Hello</Text>
-        )
-    }
+  render () {
+    return (
+      <Text>Hello</Text>
+    )
+  }
 }
 
-export default FriendMessages;
-//d
+export default FriendMessages
+// d

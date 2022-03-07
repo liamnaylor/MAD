@@ -1,163 +1,167 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity,Button, ActivityIndicator, FlatList, ScrollView,TextInput,Image, SafeAreaView,SectionList } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+/* eslint-disable react/prop-types */
+/* eslint-disable no-throw-literal */
+/* eslint-disable camelcase */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 
-class ProfileScreenMenu extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-            isLoading:true,
-            userDetails:[],
+import React, { Component } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, Button, ActivityIndicator, FlatList, ScrollView, TextInput, Image, SafeAreaView, SectionList } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-            photo:null,
-        }
+class ProfileScreenMenu extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isLoading: true,
+      userDetails: [],
+
+      photo: null
     }
+  }
 
     logout = async () => {
-        let token = await AsyncStorage.getItem('@session_token');
-        await AsyncStorage.removeItem('@session_token');
-        return fetch("http://localhost:3333/api/1.0.0/logout", {
-            method: 'POST',
-            headers: {
-                "X-Authorization": token
-            }
-        })
+      const token = await AsyncStorage.getItem('@session_token')
+      await AsyncStorage.removeItem('@session_token')
+      return fetch('http://localhost:3333/api/1.0.0/logout', {
+        method: 'POST',
+        headers: {
+          'X-Authorization': token
+        }
+      })
         .then((response) => {
-            if(response.status === 200){
-                this.props.navigation.navigate("Login");
-            }else if(response.status === 401){
-                this.props.navigation.navigate("Login");
-            }else{
-                throw 'Something went wrong';
-            }
+          if (response.status === 200) {
+            this.props.navigation.navigate('Login')
+          } else if (response.status === 401) {
+            this.props.navigation.navigate('Login')
+          } else {
+            throw 'Something went wrong'
+          }
         })
         .catch((error) => {
-            console.log(error);
-            ToastAndroid.show(error, ToastAndroid.SHORT);
+          console.log(error)
+          ToastAndroid.show(error, ToastAndroid.SHORT)
         })
     }
 
     checkLoggedIn = async () => {
-        const value = await AsyncStorage.getItem('@session_token');
-        if(value !== null) {
-          this.setState({token:value});
-        }else{
-            this.props.navigation.navigate("Login");
-        }
+      const value = await AsyncStorage.getItem('@session_token')
+      if (value !== null) {
+        this.setState({ token: value })
+      } else {
+        this.props.navigation.navigate('Login')
       }
-
-
-
-    componentDidMount(){
-        this.unsubscribe=this.props.navigation.addListener('focus', ()=>{
-            this.checkLoggedIn();
-        })
-        this.retrieveUserDetails();
-        this.retrievePhoto();
     }
 
-    componentWillUnmount(){
-        this.unsubscribe();
+    componentDidMount () {
+      this.unsubscribe = this.props.navigation.addListener('focus', () => {
+        this.checkLoggedIn()
+      })
+      this.retrieveUserDetails()
+      this.retrievePhoto()
     }
 
-    retrieveUserDetails=async()=>{
-        const token= await AsyncStorage.getItem('@session_token');
-        const user_id= await AsyncStorage.getItem('@user_id');
-        return fetch("http://localhost:3333/api/1.0.0/user/"+user_id,{
-            method:'GET',
-            headers:{
-                'X-Authorization':token,
-                'Content-Type':'application/json'
-            }
-        })
-        .then((response)=>response.json())
-
-        .then((responseJson)=>{
-            this.setState({
-                isLoading: false,
-                userDetails: responseJson
-            })
-            console.log(responseJson)
-        })
-        .catch((error)=>{
-            console.log(error);
-        })
+    componentWillUnmount () {
+      this.unsubscribe()
     }
 
-    updateUserDetails=async()=>{
-        const token=await AsyncStorage.getItem('@session_token');
-        const user_id=await AsyncStorage.getItem('@user_id');
-        let toUpdate={
-            first_name:this.state.first_name,
-            last_name:this.state.last_name,
-            email:this.state.email,
-            password:this.state.password
+    retrieveUserDetails=async () => {
+      const token = await AsyncStorage.getItem('@session_token')
+      const user_id = await AsyncStorage.getItem('@user_id')
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id, {
+        method: 'GET',
+        headers: {
+          'X-Authorization': token,
+          'Content-Type': 'application/json'
         }
-        return fetch("http://localhost:3333/api/1.0.0/user/"+user_id,{
-            method:'PATCH',
-            headers:{
-                'X-Authorization':token,
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify(toUpdate)
+      })
+        .then((response) => response.json())
+
+        .then((responseJson) => {
+          this.setState({
+            isLoading: false,
+            userDetails: responseJson
+          })
+          console.log(responseJson)
         })
-        .then((response)=>{
-            console.log("Your Details have been updated.")
-        })
-        .catch((error)=>{
-            console.log("Unable to update your details"+error);
-        })
-    }
-    retrievePhoto=async()=>{
-        const token = await AsyncStorage.getItem('@session_token');
-        const user_id=await AsyncStorage.getItem('@user_id');
-        return fetch("http://localhost:3333/api/1.0.0/user/"+user_id+"/photo",{
-            method:'GET',
-            headers:{
-                'X-Authorization':token,
-                'Content-Type':'image/png'
-            },
-        })
-        .then((res)=>{
-            return res.blob();
-        })
-        .then((resBlob)=>{
-            let data = URL.createObjectURL(resBlob);
-            this.setState({
-                photo:data,
-                isLoading:false
-            })
-        })
-        .catch((error)=>{
-            console.log("Error Occurred",error);
+        .catch((error) => {
+          console.log(error)
         })
     }
-    render(){
-        if(this.state.isLoading){
-            return(
+
+    updateUserDetails=async () => {
+      const token = await AsyncStorage.getItem('@session_token')
+      const user_id = await AsyncStorage.getItem('@user_id')
+      const toUpdate = {
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        email: this.state.email,
+        password: this.state.password
+      }
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id, {
+        method: 'PATCH',
+        headers: {
+          'X-Authorization': token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(toUpdate)
+      })
+        .then((response) => {
+          console.log('Your Details have been updated.')
+        })
+        .catch((error) => {
+          console.log('Unable to update your details' + error)
+        })
+    }
+
+    retrievePhoto=async () => {
+      const token = await AsyncStorage.getItem('@session_token')
+      const user_id = await AsyncStorage.getItem('@user_id')
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/photo', {
+        method: 'GET',
+        headers: {
+          'X-Authorization': token,
+          'Content-Type': 'image/png'
+        }
+      })
+        .then((res) => {
+          return res.blob()
+        })
+        .then((resBlob) => {
+          const data = URL.createObjectURL(resBlob)
+          this.setState({
+            photo: data,
+            isLoading: false
+          })
+        })
+        .catch((error) => {
+          console.log('Error Occurred', error)
+        })
+    }
+
+    render () {
+      if (this.state.isLoading) {
+        return (
                 <View>
                     <ActivityIndicator
                         size="large"
                         color="#00ff00"
                     />
                 </View>
-            );
-        }
-        else{
-
-            return(
+        )
+      } else {
+        return (
                 <SafeAreaView style={styles.container}>
                     <ScrollView>
-                        
+
                         <View>
                         <Text style={styles.title}>Your Profile</Text>
 
                             <Image
                                 style={styles.image}
                                 source={{
-                                    uri:this.state.photo,
+                                  uri: this.state.photo
                                 }}
-                                
+
                             />
 
                         </View>
@@ -165,7 +169,7 @@ class ProfileScreenMenu extends Component{
                             <TouchableOpacity
                                 style = {styles.buttonUpload}
                                 title="Upload Profile Picture Here"
-                                onPress={()=> this.props.navigation.navigate("Profile")}
+                                onPress={() => this.props.navigation.navigate('Profile')}
                             >
                                 <Text>Upload Profile Picture here</Text>
                             </TouchableOpacity>
@@ -173,13 +177,16 @@ class ProfileScreenMenu extends Component{
                         <View>
                             <FlatList
                                 data={this.state.userDetails}
-                                renderItem={({item})=>(
+                                renderItem={({ item }) => (
                                     <View>
                                         <Text>{item.first_name}</Text>
-                                        
+                                        <Button
+                                            title="your details"
+
+                                        />
                                     </View>
                                 )}
-                                keyExtractor={(user,index)=>user.user_id.toString()}
+                                keyExtractor={(user, index) => user.user_id.toString()}
                             />
                         </View>
 
@@ -189,100 +196,96 @@ class ProfileScreenMenu extends Component{
                         <View>
                             <TextInput
                                 placeholder="Update First Name Here"
-                                onChangeText={(first_name)=> this.setState({first_name})}
+                                onChangeText={(first_name) => this.setState({ first_name })}
                             />
                         </View>
                         <View>
                             <TextInput
                                 placeholder="Update Last Name Here"
-                                onChangeText={(last_name)=> this.setState({last_name})}
+                                onChangeText={(last_name) => this.setState({ last_name })}
                             />
                         </View>
                         <View>
                             <TextInput
                                 placeholder="Update Email Address Here"
-                                onChangeText={(email)=> this.setState({email})}
+                                onChangeText={(email) => this.setState({ email })}
                             />
                         </View>
                         <View>
                             <TextInput
                                 placeholder="Update Password Here"
-                                onChangeText={(password)=> this.setState({password})}
+                                onChangeText={(password) => this.setState({ password })}
                             />
                             </View>
                             <View>
                                 <TouchableOpacity
                                     style = {styles.button}
                                     title="Update Details"
-                                    onPress={()=> this.updateUserDetails()}
-                                    
+                                    onPress={() => this.updateUserDetails()}
+
                                 >
                                     <Text>Update Details</Text>
-                                
+
                                 </TouchableOpacity>
                             </View>
-                                
+
                     </ScrollView>
                 </SafeAreaView>
-            )
-        }
+        )
+      }
     }
 }
 
-const styles=StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#E9CDCD",
-        alignItems: "center",
-        justifyContent: "center",
-      },
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#E9CDCD',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
 
-    button: {
-        width: "80%",
-        height: 50,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: 40,
-        backgroundColor: "#DDDCA1",
-    },
+  button: {
+    width: '80%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    backgroundColor: '#DDDCA1'
+  },
 
-    buttonUpload:{
-        width: "80%",
-        height: 50,
-        alignItems: "center",
-        justifyContent: "center",
-        marginBottom: 20,
-        backgroundColor: "#DDDCA1",
-    },
+  buttonUpload: {
+    width: '80%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+    backgroundColor: '#DDDCA1'
+  },
 
+  image: {
+    borderWidth: 50,
+    borderRadius: 400 / 2,
+    overflow: 'hidden',
+    width: 200,
+    height: 200
 
-    image:{
-        borderWidth:50,
-        borderRadius:400/2,
-        overflow:"hidden",
-        width:200,
-        height:200,
-        borderWidth:2
+  },
+  title: {
+    color: '#000',
+    fontSize: 30,
+    fontWeight: 'bold',
+    fontFamily: 'Sans-Serif',
+    marginBottom: 20
 
-    },
-    title: {
-        color: "#000",
-        fontSize: 30,
-        fontWeight: "bold",
-        fontFamily:"Sans-Serif",
-        marginBottom:20
-        
-    },
-    title2:{
-        color: "#000",
-        fontSize: 24,
-        fontWeight: "bold",
-        fontFamily:"Sans-Serif",
-        marginTop:20,
-        marginBottom:10
-    }
+  },
+  title2: {
+    color: '#000',
+    fontSize: 24,
+    fontWeight: 'bold',
+    fontFamily: 'Sans-Serif',
+    marginTop: 20,
+    marginBottom: 10
+  }
 })
 
-export default ProfileScreenMenu;
-
-//sdv
+export default ProfileScreenMenu

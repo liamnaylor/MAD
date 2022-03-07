@@ -1,74 +1,71 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import RegisterScreen from './screens/RegisterScreen';
-import LoginScreen from './screens/LoginScreen';
-import HomeScreen from './screens/HomeScreen';
-import FriendSearchScreen from './screens/FriendsSearchScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import PostScreen from './screens/PostScreen';
+import RegisterScreen from './screens/RegisterScreen'
+import LoginScreen from './screens/LoginScreen'
+import HomeScreen from './screens/HomeScreen'
+import FriendSearchScreen from './screens/FriendsSearchScreen'
+import ProfileScreen from './screens/ProfileScreen'
+import PostScreen from './screens/PostScreen'
 import ProfileScreenMenu from './screens/ProfileMenuScreen'
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import React, { Component } from 'react';
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import React, { Component } from 'react'
+const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
 
 class App extends Component {
-  render(){
+  render () {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRootName="LoginScreen">
+        <Stack.Navigator initialRootName='LoginScreen'>
           <Stack.Screen
-            name="Login"
+            name='Login'
             component={LoginScreen}
           />
 
           <Stack.Screen
-            name="RegisterScreen"
+            name='RegisterScreen'
             component={RegisterScreen}
-            options={{title: 'Register'}}
+            options={{ title: 'Register' }}
           />
 
           <Stack.Screen
-            name = "Home"
+            name='Home'
             component={HomeScreen}
-            options={{title: 'Home'}}
-          />  
+            options={{ title: 'Home' }}
+          />
 
           <Stack.Screen
-            name = "Search"
+            name='Search'
             component={FriendSearchScreen}
-            options={{title: 'Friend Search'}}
+            options={{ title: 'Friend Search' }}
           />
           <Stack.Screen
-            name = "Profile"
+            name='Profile'
             component={ProfileScreen}
-            options={{title: 'Profile'}}
+            options={{ title: 'Profile' }}
           />
           <Stack.Screen
-            name="Your Details"
+            name='Your Details'
             component={ProfileScreenMenu}
-            options={{title:'Profile Menu'}}
+            options={{ title: 'Profile Menu' }}
           />
 
           <Stack.Screen
-            name = "Post"
+            name='Post'
             component={PostScreen}
-            options={{title: 'Post'}}
+            options={{ title: 'Post' }}
           />
-          
-         
 
-      </Stack.Navigator>
-      
+        </Stack.Navigator>
 
-    </NavigationContainer>
-    );
+      </NavigationContainer>
+    )
   }
 }
 
-export default App;
+export default App
 
-//sdf
+// sdf
