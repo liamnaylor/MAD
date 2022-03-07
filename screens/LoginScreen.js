@@ -108,30 +108,21 @@ const styles = StyleSheet.create({
       height: 50,
       flex: 1,
       padding: 20,
-      marginLeft: 20,
+      marginLeft:20,
       justifyContent: "center",
       flexDirection:"row"
     },
   
-    regBtn: {
-        width: "80%",
-        height: 50,
-        alignItems: "flex-end",
-        justifyContent: "center",
-        marginTop: 40,
-        borderWidth:10,
-        backgroundColor: "#DDDCA1",
-        flexDirection:"row",
-        
-      },
   
     loginBtn: {
       width: "80%",
       height: 50,
       alignItems: "center",
       justifyContent: "center",
-      marginTop: 40,
+      marginTop: 20,
       backgroundColor: "#DDDCA1",
+      flexDirection:'row',
+      marginHorizontal:20
     },
   
     title: {

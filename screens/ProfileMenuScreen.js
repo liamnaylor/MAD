@@ -148,14 +148,10 @@ class ProfileScreenMenu extends Component{
             return(
                 <SafeAreaView style={styles.container}>
                     <ScrollView>
+                        
                         <View>
-                            <Text>This is the profile menu screen.</Text>
-                            <Button
-                                title="Upload Profile Picture Here"
-                                onPress={()=> this.props.navigation.navigate("Profile")}
-                            />
-                        </View>
-                        <View>
+                        <Text style={styles.title}>Your Profile</Text>
+
                             <Image
                                 style={styles.image}
                                 source={{
@@ -164,6 +160,15 @@ class ProfileScreenMenu extends Component{
                                 
                             />
 
+                        </View>
+                        <View>
+                            <TouchableOpacity
+                                style = {styles.buttonUpload}
+                                title="Upload Profile Picture Here"
+                                onPress={()=> this.props.navigation.navigate("Profile")}
+                            >
+                                <Text>Upload Profile Picture here</Text>
+                            </TouchableOpacity>
                         </View>
                         <View>
                             <FlatList
@@ -179,38 +184,42 @@ class ProfileScreenMenu extends Component{
                         </View>
 
                         <View>
-                            <Text>Update Your Details</Text>
+                            <Text style={styles.title2}>Update Your Details</Text>
                         </View>
                         <View>
                             <TextInput
-                                placeholder="First Name"
+                                placeholder="Update First Name Here"
                                 onChangeText={(first_name)=> this.setState({first_name})}
                             />
                         </View>
                         <View>
                             <TextInput
-                                placeholder="Last Name"
+                                placeholder="Update Last Name Here"
                                 onChangeText={(last_name)=> this.setState({last_name})}
                             />
                         </View>
                         <View>
                             <TextInput
-                                placeholder="Email Address"
+                                placeholder="Update Email Address Here"
                                 onChangeText={(email)=> this.setState({email})}
                             />
                         </View>
                         <View>
                             <TextInput
-                                placeholder="Password"
+                                placeholder="Update Password Here"
                                 onChangeText={(password)=> this.setState({password})}
                             />
                             </View>
                             <View>
-                                <Button
+                                <TouchableOpacity
+                                    style = {styles.button}
                                     title="Update Details"
                                     onPress={()=> this.updateUserDetails()}
                                     
-                                />
+                                >
+                                    <Text>Update Details</Text>
+                                
+                                </TouchableOpacity>
                             </View>
                                 
                     </ScrollView>
@@ -221,9 +230,32 @@ class ProfileScreenMenu extends Component{
 }
 
 const styles=StyleSheet.create({
-    container:{
-        alignItems:'center'
+    container: {
+        flex: 1,
+        backgroundColor: "#E9CDCD",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+
+    button: {
+        width: "80%",
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 40,
+        backgroundColor: "#DDDCA1",
     },
+
+    buttonUpload:{
+        width: "80%",
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: 20,
+        backgroundColor: "#DDDCA1",
+    },
+
+
     image:{
         borderWidth:50,
         borderRadius:400/2,
@@ -233,6 +265,22 @@ const styles=StyleSheet.create({
         borderWidth:2
 
     },
+    title: {
+        color: "#000",
+        fontSize: 30,
+        fontWeight: "bold",
+        fontFamily:"Sans-Serif",
+        marginBottom:20
+        
+    },
+    title2:{
+        color: "#000",
+        fontSize: 24,
+        fontWeight: "bold",
+        fontFamily:"Sans-Serif",
+        marginTop:20,
+        marginBottom:10
+    }
 })
 
 export default ProfileScreenMenu;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, TextInput, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, Button, TextInput, ScrollView, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 
 class RegisterScreen extends Component{
     constructor(props){
@@ -39,65 +39,89 @@ class RegisterScreen extends Component{
     }
     render(){
         return(
-            <ScrollView>
-                <View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="First Name"
-                        onChangeText={(first_name)=> this.setState({first_name})}
-                    />
-                </View>
-                <View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Last Name"
-                        onChangeText={(last_name)=> this.setState({last_name})}
-                    />
-                </View>
-                <View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Email Address"
-                        onChangeText={(email)=> this.setState({email})}
-                    />
-                </View>
-                <View>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Password"
-                        onChangeText={(password)=> this.setState({password})}
-                    />
-                </View>
-                <View>
-                    <Button
-                        title="Register"
-                        onPress={()=> this.reg()}
+            <SafeAreaView style={styles.container}>
+                <ScrollView>
+                    <View>
+                        <Text style = {styles.title}>Create An Account</Text>
+                    </View>
+                    <View>
+                        <TextInput
+                            style={styles.textIn}
+                            placeholder="Enter your First Name here"
+                            onChangeText={(first_name)=> this.setState({first_name})}
+                        />
+                    </View>
+                    <View>
+                        <TextInput
+                            style={styles.textIn}
+                            placeholder="Enter your Last Name here"
+                            onChangeText={(last_name)=> this.setState({last_name})}
+                        />
+                    </View>
+                    <View>
+                        <TextInput
+                            style={styles.textIn}
+                            placeholder="Enter your Email Address here"
+                            onChangeText={(email)=> this.setState({email})}
+                        />
+                    </View>
+                    <View>
+                        <TextInput
+                            style={styles.textIn}
+                            placeholder="Enter your Password here"
+                            onChangeText={(password)=> this.setState({password})}
+                        />
+                    </View>
+                    <View>
+                        <TouchableOpacity
+                            style={styles.createButton}
+                            title="Register"
+                            onPress={()=> this.reg()}
+                            
+                        >
+                            <Text>Create Account</Text>
+                        </TouchableOpacity>
+                    </View>
                         
-                    />
-                </View>
-                    
-            </ScrollView>
+                </ScrollView>
+            </SafeAreaView>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    input: {
-      width: 350,
-      height: 55,
-      backgroundColor: '#42A5F5',
-      margin: 10,
-      padding: 8,
-      color: 'white',
-      borderRadius: 14,
-      fontSize: 18,
-      fontWeight: '500',
+    title: {
+        color: "#000",
+        fontSize: 30,
+        fontWeight: "bold",
+        fontFamily:"Sans-Serif",
+        marginBottom:60
+        
+    },
+    createButton: {
+        width: "80%",
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 20,
+        marginLeft:25,
+        backgroundColor: "#DDDCA1",
+    },
+    textIn:{
+        borderColor:"black",
+        width:"100",
+        borderWidth:1,
+        borderRadius:10,
+        padding:10,
+        marginBottom:5,
+        backgroundColor:"#DCDCDC"
     },
     container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
-    }
+        flex: 1,
+        backgroundColor: "#E9CDCD",
+        alignItems: "center",
+        justifyContent: "center",
+      },
   })
 
 export default RegisterScreen;

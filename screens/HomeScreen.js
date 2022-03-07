@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, Button,FlatList,Image,StyleSheet, SafeAreaView,View } from 'react-native';
+import { Text, ScrollView, Button,FlatList,Image,StyleSheet, SafeAreaView,View, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class HomeScreen extends Component{
@@ -62,6 +62,27 @@ class HomeScreen extends Component{
         
     }
 
+    getSinglePost=async(user_id,post_id)=>{
+        const token = await AsyncStorage.getItem('@session_token');
+        return fetch("http://localhost:3333/api/1.0.0/user/"+user_id+"/post/"+post_id,{
+            headers:{
+                'X-Authorization':token,
+                'Content-Type':'application/json'
+            }
+        })
+        .then((response)=>response.json())
+        .then((responseJson)=>{
+            this.setState({
+                friendPosts:responseJson
+            })
+            console.log(responseJson)
+
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
+
     likePost=async(user_id,post_id)=>{
         const token = await AsyncStorage.getItem('@session_token');
         return fetch("http://localhost:3333/api/1.0.0/user/"+user_id+"/post/"+post_id+"/like",{
@@ -73,7 +94,9 @@ class HomeScreen extends Component{
         })
         .then((response)=>{
             console.log("Post Liked!",response);
+            
             this.getOtherUserPosts();
+            
         })
         .catch((error)=>{
             console.error(error);
@@ -243,6 +266,17 @@ class HomeScreen extends Component{
             console.log(error);
         });
     }
+    itemDiv=()=>{
+        return(
+            <View>
+                style={{
+                    height:1,
+                    width:100,
+                    backgroundColor:'#ffffff'
+                }}
+            </View>
+        );
+    }
 
     render(){
         return (
@@ -294,7 +328,6 @@ class HomeScreen extends Component{
                         <FlatList
                             style={styles.posts}
                             data={this.state.friends}
-                            ItemSeparatorComponent={this.ItemSeparator}
 
                             renderItem={({item})=>(
                                 <View>
@@ -316,19 +349,25 @@ class HomeScreen extends Component{
                         <FlatList
                             data={this.state.friendPosts}
                             renderItem={({item})=>(
-                                <View>
+                                <View style = {styles.postContainer}>
                                     <Text style = {styles.divider}></Text>
 
                                     <Text style={styles.posts}>{item.author.first_name} {item.author.last_name} Says - {item.text} Likes: {item.numLikes}
                                     </Text>
-                                    <Button
+                                    <TouchableOpacity
+                                        style = {styles.button}
                                         title="Like Post"
-                                        onPress={()=>this.likePost(item.author.user_id,item.post_id) }
-                                    />
-                                    <Button
+                                        onPress={()=>this.likePost(item.author.user_id,item.post_id)}
+                                    >
+                                        <Text>Like Post</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={styles.button}
                                         title="Remove Like"
                                         onPress={()=> this.removeLike(item.author.user_id,item.post_id)}
-                                    />
+                                    >
+                                        <Text>Remove Like</Text>
+                                    </TouchableOpacity>
                                     <Text style={styles.divider}></Text>
                                 </View>
                             )}
@@ -353,28 +392,45 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
       },
+    
+    postContainer:{
+        backgroundColor:"#FFFFFF",
+        alignItems:'center',
+        borderWidth:5
+    },
     friendText:{
         fontWeight:'bold',
-        fontSize:'24'
+        fontSize:'24',
+        marginTop:30
+    },
+    friendView:{
+        fontWeight:'bold',
+        fontFamily:'sans-serif',
+        fontSize:24,
     },
     image: {
         marginBottom: 40,
         borderRadius:50
     },
     
-    TextInput: {
-        height: 50,
-        flex: 1,
-        padding: 10,
-        marginLeft: 20,
-        justifyContent: "center",
-    },
-    
     posts:{
         padding:2,
         flex:1,
+        marginTop:30, 
+        fontWeight:'bold', 
+        fontSize:16, 
+        fontFamily:"helvetica"
     },
-    
+    button: {
+        width: 100,
+        height: 100,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop:5,
+        marginLeft:50,
+        flexDirection:'row',
+        backgroundColor: "#DDDCA1",
+      },
     
     title: {
         color: "#000",
@@ -383,7 +439,10 @@ const styles = StyleSheet.create({
         marginTop:20
     },
     divider: {
-        marginBottom:40
+        height:1,
+        width:100,
+        backgroundColor:'#ffffff',
+        marginBottom:30
     }
     
 });
