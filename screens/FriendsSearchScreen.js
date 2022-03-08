@@ -4,7 +4,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component, useState, useEffect } from 'react'
-import { Text, ScrollView, Button, FlatList, View, TextInput } from 'react-native'
+import { Text, ScrollView, Button, FlatList, View, TextInput, StyleSheet, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { SearchBar } from 'react-native-elements'
 
@@ -14,9 +14,13 @@ class FriendSearchScreen extends Component {
     this.state = {
       listData: [],
       isLoading: true,
+      searchBarLoading: true,
       searchText: '',
-      searchData: []
+      searchData: [],
+      textToSearch: ''
+
     }
+    this.arrayholder = []
   }
 
     logout = async () => {
@@ -41,6 +45,10 @@ class FriendSearchScreen extends Component {
           console.log(error)
           ToastAndroid.show(error, ToastAndroid.SHORT)
         })
+    }
+
+    getFlatListName (user_givenname, user_familyname) {
+      alert(user_givenname, user_familyname)
     }
 
     findFriends= async () => {
@@ -87,9 +95,12 @@ class FriendSearchScreen extends Component {
         .then((response) => {
           console.log('Friend Request Sent', response)
           this.findFriends()
+          if (response.status === 403) {
+            alert('YOU CANNOT SEND MORE THAN ONE FRIEND REQUEST')
+          }
         })
         .catch((error) => {
-          console.error(error)
+          console.error(error, 'Something Went Wrong...')
         })
     }
 
@@ -97,7 +108,7 @@ class FriendSearchScreen extends Component {
       this.unsubscribe = this.props.navigation.addListener('focus', () => {
         this.checkLoggedIn()
       })
-      this.findFriends()
+      this.searchBar()
     }
 
     componentWillUnmount () {
@@ -111,8 +122,7 @@ class FriendSearchScreen extends Component {
       }
     }
 
-    searchBar=async (searchText) => {
-      this.setState(searchText)
+    searchBar=async () => {
       const token = await AsyncStorage.getItem('@session_token')
       return fetch('http://localhost:3333/api/1.0.0/search', {
         headers: {
@@ -123,12 +133,27 @@ class FriendSearchScreen extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
           this.setState({
+            isLoading: false,
             searchData: responseJson
+          }, () => {
+            this.arrayholder = responseJson
           })
         })
         .catch((error) => {
           console.error(error)
         })
+    }
+
+    searchSystem (textToSearch) {
+      const newData = this.arrayholder.filter(item => {
+        const itemData = item.user_familyname.toUpperCase()
+        const textData = item.textToSearch.toUpperCase()
+        return itemData.indexOf(textData) > -1
+      })
+      this.setState({
+        searchData: newData,
+        textToSearch: textToSearch
+      })
     }
 
     ItemView = ({ item }) => {
@@ -143,19 +168,6 @@ class FriendSearchScreen extends Component {
       )
     };
 
-    ItemSeparatorView = () => {
-      return (
-          // Flat List Item Separator
-          <View
-            style={{
-              height: 0.5,
-              width: '100%',
-              backgroundColor: '#C8C8C8'
-            }}
-          />
-      )
-    };
-
     render () {
       if (this.state.isLoading) {
         return (
@@ -166,40 +178,85 @@ class FriendSearchScreen extends Component {
                       justifyContent: 'center',
                       alignItems: 'center'
                     }}>
-                    <Text>Hello</Text>
-                </View>
-        )
-      } else {
-        return (
-                <View>
-                    <TextInput
-                        onChangeText={(searchText) => this.setState({ searchText })}
-                        placeholder='Search For Friends Here'
-
-                    />
-                    <Button
-                        title='Search'
-                        onPress={(searchText) => this.searchBar(searchText)}
-                    />
-                    <FlatList
-                        data={this.state.searchData}
-                        renderItem={({ item }) => (
-                            <View>
-                                <Text>{item.user_givenname} {item.user_familyname} {item.user_id}</Text>
-
-                                <Button
-                                    title="Add Friend"
-                                    onPress={() => this.addFriend(item.user_id)}
-                                />
-                            </View>
-                        )}
-                        keyExtractor={(user, index) => user.user_id.toString()}
-                    />
+                      <ActivityIndicator/>
                 </View>
         )
       }
+      return (
+              <SafeAreaView style = {styles.container}>
+                <ScrollView>
+                  <View>
+                      <Text style = {styles.title}>Search for Friends</Text>
+                      <TextInput
+                        placeholder="Search Here"
+                        onChangeText={textToSearch => this.searchSystem(textToSearch)}
+                        value={this.state.textToSearch}
+                        underlineColorAndroid = 'transparent'
+                      />
+                      <TouchableOpacity
+                          title='Search'
+                          onPress={(searchText) => this.searchBar(searchText)}
+                      >
+                      <Text>Search</Text>
+                      </TouchableOpacity>
+                      <FlatList
+                          data={this.state.searchData}
+                          renderItem={({ item }) => (
+
+                              <View>
+                                  <Text>{item.user_givenname} {item.user_familyname} {item.user_id}</Text>
+
+                                  <TouchableOpacity
+                                      style={styles.button}
+                                      title="Add Friend"
+                                      onPress={() => this.addFriend(item.user_id)}
+                                  >
+                                    <Text>Add Friend</Text>
+                                  </TouchableOpacity>
+                              </View>
+                          )}
+                          keyExtractor={(user, index) => index.toString()}
+                      />
+                  </View>
+                </ScrollView>
+              </SafeAreaView>
+      )
     }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#E9CDCD',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  button: {
+    width: '80%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    backgroundColor: '#DDDCA1',
+    flexDirection: 'row',
+    display: 'flex',
+    marginHorizontal: 20
+  },
+  input: {
+    borderColor: 'black',
+    width: '100',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 5,
+    backgroundColor: '#DCDCDC'
+  },
+  title: {
+    color: '#000',
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 20
+  }
+})
 export default FriendSearchScreen
 //

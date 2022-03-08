@@ -106,6 +106,7 @@ class ProfileScreenMenu extends Component {
       })
         .then((response) => {
           console.log('Your Details have been updated.', response)
+          alert('Your Details have been Updated.')
         })
         .catch((error) => {
           console.log('Unable to update your details' + error)

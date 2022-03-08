@@ -29,6 +29,9 @@ class LoginScreen extends Component {
           if (response.status === 200) {
             return response.json()
           }
+          if (response.status === 400) {
+            alert('Wrong Details entered, please try again')
+          }
         })
         .then(async (responseJson) => {
           console.log(responseJson)

@@ -17,6 +17,7 @@ class HomeScreen extends Component {
       isLoading: true,
       friendRequests: [],
       friends: [],
+      onePost: [],
       userSearchIn: '',
       text: '',
       photo: null
@@ -61,14 +62,18 @@ class HomeScreen extends Component {
 
           })
           console.log(responseJson)
+          if (responseJson === null) {
+            alert('This user has not posted anything yet.')
+          }
         })
         .catch((error) => {
           console.log(error)
         })
     }
 
-    getSinglePost=async (user_id, post_id) => {
+    getSinglePost=async (post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
+      const user_id = await AsyncStorage.getItem('@user_id')
       return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
         headers: {
           'X-Authorization': token,
@@ -78,9 +83,9 @@ class HomeScreen extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
           this.setState({
-            friendPosts: responseJson
+            onePost: responseJson
           })
-          console.log(responseJson)
+          alert(responseJson)
         })
         .catch((error) => {
           console.log(error)
@@ -376,6 +381,14 @@ class HomeScreen extends Component {
                                         onPress={() => this.removeLike(item.author.user_id, item.post_id)}
                                     >
                                         <Text>Remove Like</Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity
+                                        style={styles.button}
+                                        title="View Post"
+                                        onPress={() => this.getSinglePost(item.author.user_id, item.post_id)}
+                                    >
+                                      <Text>View Post</Text>
                                     </TouchableOpacity>
                                     <Text style={styles.divider}></Text>
                                 </View>
