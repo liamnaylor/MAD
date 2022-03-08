@@ -5,7 +5,7 @@
 /* eslint-disable no-undef */
 
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Button, ActivityIndicator, FlatList, ScrollView, TextInput, Image, SafeAreaView, SectionList } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, FlatList, ScrollView, TextInput, Image, SafeAreaView } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class ProfileScreenMenu extends Component {
@@ -75,7 +75,6 @@ class ProfileScreenMenu extends Component {
         }
       })
         .then((response) => response.json())
-
         .then((responseJson) => {
           this.setState({
             isLoading: false,
@@ -106,7 +105,7 @@ class ProfileScreenMenu extends Component {
         body: JSON.stringify(toUpdate)
       })
         .then((response) => {
-          console.log('Your Details have been updated.')
+          console.log('Your Details have been updated.', response)
         })
         .catch((error) => {
           console.log('Unable to update your details' + error)
@@ -175,18 +174,15 @@ class ProfileScreenMenu extends Component {
                             </TouchableOpacity>
                         </View>
                         <View>
+                            <Text>Hello</Text>
                             <FlatList
                                 data={this.state.userDetails}
                                 renderItem={({ item }) => (
                                     <View>
                                         <Text>{item.first_name}</Text>
-                                        <Button
-                                            title="your details"
-
-                                        />
                                     </View>
                                 )}
-                                keyExtractor={(user, index) => user.user_id.toString()}
+                                keyExtractor={(user) => user.user_id.toString()}
                             />
                         </View>
 

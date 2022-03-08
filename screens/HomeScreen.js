@@ -263,7 +263,6 @@ class HomeScreen extends Component {
 
           })
           console.log(responseJson)
-          this.getProfilePhoto()
         })
         .catch((error) => {
           console.log(error)
