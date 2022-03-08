@@ -52,6 +52,7 @@ class ProfileScreen extends Component {
     })
       .then((response) => {
         console.log('Picture added', response)
+        alert('You have uploaded a new profile picture successfully')
       })
       .catch((err) => {
         console.log('I am sorry, there is an issue with the image you are attempting to upload.', err)

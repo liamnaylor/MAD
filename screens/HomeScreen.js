@@ -71,9 +71,8 @@ class HomeScreen extends Component {
         })
     }
 
-    getSinglePost=async (post_id) => {
+    getSinglePost=async (user_id, post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      const user_id = await AsyncStorage.getItem('@user_id')
       return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
         headers: {
           'X-Authorization': token,
@@ -85,7 +84,8 @@ class HomeScreen extends Component {
           this.setState({
             onePost: responseJson
           })
-          alert(responseJson)
+          console.log(responseJson)
+          alert('The post you have selected: ' + JSON.stringify(responseJson))
         })
         .catch((error) => {
           console.log(error)

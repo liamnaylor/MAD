@@ -1,6 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import RegisterScreen from './screens/RegisterScreen'
 import LoginScreen from './screens/LoginScreen'
@@ -10,10 +9,8 @@ import ProfileScreen from './screens/ProfileScreen'
 import PostScreen from './screens/PostScreen'
 import ProfileScreenMenu from './screens/ProfileMenuScreen'
 
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import React, { Component } from 'react'
 const Stack = createNativeStackNavigator()
-const Tab = createBottomTabNavigator()
 
 class App extends Component {
   render () {

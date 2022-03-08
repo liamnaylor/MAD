@@ -80,6 +80,7 @@ class ProfileScreenMenu extends Component {
             isLoading: false,
             userDetails: responseJson
           })
+          alert('Your Details are: ' + JSON.stringify(responseJson))
           console.log(responseJson)
         })
         .catch((error) => {
@@ -180,7 +181,7 @@ class ProfileScreenMenu extends Component {
                                 data={this.state.userDetails}
                                 renderItem={({ item }) => (
                                     <View>
-                                        <Text>{item.first_name}</Text>
+                                        <Text>{item.first_name} {item.last_name}</Text>
                                     </View>
                                 )}
                                 keyExtractor={(user) => user.user_id.toString()}
@@ -260,7 +261,7 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    borderWidth: 50,
+    borderWidth: 5,
     borderRadius: 400 / 2,
     overflow: 'hidden',
     width: 200,
