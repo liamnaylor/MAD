@@ -5,7 +5,7 @@
 /* eslint-disable no-undef */
 
 import React, { Component } from 'react'
-import { View, Text, Button, ScrollView, TextInput, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TextInput, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 class LoginScreen extends Component {
   constructor (props) {

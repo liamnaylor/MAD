@@ -5,7 +5,7 @@
 /* eslint-disable no-undef */
 
 import React, { Component } from 'react'
-import { Text, ScrollView, Button, FlatList, Image, StyleSheet, SafeAreaView, View, TouchableOpacity } from 'react-native'
+import { Text, ScrollView, Button, FlatList, StyleSheet, SafeAreaView, View, TouchableOpacity, Modal, Dimensions } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class HomeScreen extends Component {
@@ -20,7 +20,8 @@ class HomeScreen extends Component {
       onePost: [],
       userSearchIn: '',
       text: '',
-      photo: null
+      photo: null,
+      modalVisible: false
 
     }
   }
@@ -105,7 +106,11 @@ class HomeScreen extends Component {
           console.log('Post Liked!', response)
 
           this.getOtherUserPosts()
-          alert('You have liked the post')
+          if (response.status === 400) {
+            alert('YOU CAN ONLY LIKE THE POST ONE TIME')
+          } else if (response.status === 200) {
+            alert('You have liked the post')
+          }
         })
         .catch((error) => {
           console.log('Something Went Wrong...')
@@ -192,6 +197,7 @@ class HomeScreen extends Component {
       })
         .then((response) => {
           console.log('You have a new friend' + response)
+          alert('You have accepted the friend request')
         })
         .catch((error) => {
           console.error(error)
@@ -209,6 +215,7 @@ class HomeScreen extends Component {
       })
         .then((response) => {
           this.getFriendRequests()
+          alert('You have rejected the friend request.')
         })
         .catch((error) => {
           console.error(error)
@@ -284,6 +291,17 @@ class HomeScreen extends Component {
             }}
             </View>
       )
+    }
+
+    displayModal (show) {
+      this.setState({
+        modalVisible: show
+      })
+    }
+
+    viewButton () {
+      this.getSinglePost()
+      this.displayModal()
     }
 
     render () {
@@ -390,6 +408,24 @@ class HomeScreen extends Component {
                                     >
                                       <Text>View Post</Text>
                                     </TouchableOpacity>
+                                    <TouchableOpacity
+                                      onPress={() => this.displayModal(true)}
+                                    >
+                                      <Text>Modal</Text>
+                                    </TouchableOpacity>
+                                    <Modal
+                                      animationType = {'slide'}
+                                      transparent = {false}
+                                      visible = {this.state.modalVisible}
+                                    >
+                                      <Text>{item.first_name} {item.last_name}</Text>
+                                      <Text>{item.text}</Text>
+                                      <TouchableOpacity
+                                        onPress={() => this.displayModal(!this.state.modalVisible)}
+                                      >
+                                        <Text>Close</Text>
+                                      </TouchableOpacity>
+                                    </Modal>
                                     <Text style={styles.divider}></Text>
                                 </View>
                             )}
@@ -417,6 +453,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20
   },
+
   postContainer: {
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
@@ -435,7 +472,7 @@ const styles = StyleSheet.create({
   },
   friendText: {
     fontWeight: 'bold',
-    fontSize: '24',
+    fontSize: 24,
     marginTop: 30
   },
   friendView: {
@@ -456,6 +493,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'helvetica'
   },
+
   button: {
     width: 100,
     height: 100,
@@ -463,7 +501,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 5,
     marginLeft: 50,
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     display: 'flex',
     backgroundColor: '#DDDCA1'
   },

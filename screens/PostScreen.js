@@ -4,7 +4,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component } from 'react'
-import { Text, ScrollView, Button, Alert, View, TextInput, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native'
+import { Text, ScrollView, Button, Alert, View, TextInput, FlatList, ActivityIndicator, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class PostScreen extends Component {
@@ -106,8 +106,9 @@ class PostScreen extends Component {
         body: JSON.stringify(toUpdate)
       })
         .then((response) => {
-          console.log('Your Details have been updated.')
+          console.log('Your Post has been edited')
           this.getPosts()
+          alert('Your Post has been edited')
         })
         .catch((error) => {
           console.log('Unable to update your details' + error)
@@ -165,17 +166,29 @@ class PostScreen extends Component {
       } else {
         return (
                 <SafeAreaView style={styles.container}>
+                  <ScrollView>
                     <View>
+                      <Text style = {styles.title}>Your Posts</Text>
+
+                      <TouchableOpacity
+                        style = {styles.button3}
+                        title = "Back"
+                        onPress={() => this.props.navigation.goBack()}
+                      >
+                        <Text>Back</Text>
+                      </TouchableOpacity>
                         <TextInput
                             style ={styles.textIn}
                             placeholder="Enter a Message"
                             onChangeText={(text) => this.setState({ text })}
                         />
-                        <Button
-                            style={{ marginBottom: 20 }}
+                        <TouchableOpacity
+                            style={styles.button}
                             title="Post"
                             onPress={() => this.postText()}
-                        />
+                        >
+                          <Text>Post</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.button}
                             title="Save Your Input as Draft"
@@ -194,19 +207,24 @@ class PostScreen extends Component {
                                     <Text>Likes: {item.numLikes}</Text>
                                     <Text style={{ marginBottom: 10 }}></Text>
                                     <TextInput
+                                        style = {styles.textIn}
                                         placeholder="Enter Text here and press 'Submit' to update this post"
                                         onChangeText={(text) => this.setState({ text })}
                                     />
-                                    <Button
-                                        style={{ marginBottom: 10 }}
+                                    <TouchableOpacity
+                                        style={styles.button}
                                         title="Submit Changes"
                                         onPress={() => this.updatePost(item.post_id)}
-                                    />
-                                    <Button
-                                        style={{ marginTop: 20 }}
+                                    >
+                                      <Text>Submit Changes</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={styles.button}
                                         title="Delete Post"
                                         onPress={() => this.deletePost(item.post_id)}
-                                    />
+                                    >
+                                      <Text>Delete Post</Text>
+                                    </TouchableOpacity>
                                     <Text style={{ marginBottom: 40 }}></Text>
 
                                 </View>
@@ -228,7 +246,7 @@ class PostScreen extends Component {
                         />
 
                     </View>
-
+                  </ScrollView>
                 </SafeAreaView>
 
         )
@@ -272,8 +290,8 @@ const styles = StyleSheet.create({
     fontFamily: 'helvetica'
   },
   button: {
-    width: 100,
-    height: 100,
+    width: 125,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,
@@ -287,7 +305,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,
-    marginLeft: 50,
+    marginLeft: 100,
+    flexDirection: 'row',
+    backgroundColor: '#DDDCA1'
+  },
+  button3: {
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginRight: 250,
+    marginBottom: 20,
     flexDirection: 'row',
     backgroundColor: '#DDDCA1'
   },
@@ -296,7 +325,8 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 30,
     fontWeight: 'bold',
-    marginTop: 20
+    marginTop: 20,
+    textAlign: 'center'
   },
   divider: {
     height: 1,
