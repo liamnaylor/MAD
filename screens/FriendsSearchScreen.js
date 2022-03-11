@@ -20,7 +20,6 @@ class FriendSearchScreen extends Component {
       textToSearch: ''
 
     }
-    this.arrayholder = []
   }
 
     logout = async () => {
@@ -122,7 +121,8 @@ class FriendSearchScreen extends Component {
       }
     }
 
-    searchBar=async () => {
+    searchBar=async (textToSearch) => {
+      this.setState({ textToSearch })
       const token = await AsyncStorage.getItem('@session_token')
       return fetch('http://localhost:3333/api/1.0.0/search', {
         headers: {
@@ -134,26 +134,12 @@ class FriendSearchScreen extends Component {
         .then((responseJson) => {
           this.setState({
             isLoading: false,
-            searchData: responseJson
-          }, () => {
-            this.arrayholder = responseJson
+            searchData: responseJson.FriendSearchScreen
           })
         })
         .catch((error) => {
           console.error(error)
         })
-    }
-
-    searchSystem (textToSearch) {
-      const newData = this.arrayholder.filter(item => {
-        const itemData = item.user_familyname.toUpperCase()
-        const textData = item.textToSearch.toUpperCase()
-        return itemData.indexOf(textData) > -1
-      })
-      this.setState({
-        searchData: newData,
-        textToSearch: textToSearch
-      })
     }
 
     ItemView = ({ item }) => {
@@ -189,16 +175,10 @@ class FriendSearchScreen extends Component {
                       <Text style = {styles.title}>Search for Friends</Text>
                       <TextInput
                         placeholder="Search Here"
-                        onChangeText={textToSearch => this.searchSystem(textToSearch)}
-                        value={this.state.textToSearch}
+                        onChangeText={textToSearch => this.searchBar(textToSearch)}
                         underlineColorAndroid = 'transparent'
                       />
-                      <TouchableOpacity
-                          title='Search'
-                          onPress={(searchText) => this.searchBar(searchText)}
-                      >
-                      <Text>Search</Text>
-                      </TouchableOpacity>
+
                       <FlatList
                           data={this.state.searchData}
                           renderItem={({ item }) => (
@@ -256,6 +236,10 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginTop: 20
+  },
+  requestActions: {
+    display: 'flex',
+    flexDirection: 'row'
   }
 })
 export default FriendSearchScreen

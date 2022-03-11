@@ -203,7 +203,7 @@ class PostScreen extends Component {
                             data={this.state.allData}
                             renderItem={({ item }) => (
                                 <View>
-                                    <Text style = {{ marginTop: 30, fontWeight: 'bold', fontSize: 16, fontFamily: 'helvetica' }}>{item.text}</Text>
+                                    <Text style = {{ marginTop: 50, fontWeight: 'bold', fontSize: 16, fontFamily: 'helvetica' }}>{item.text}</Text>
                                     <Text>Likes: {item.numLikes}</Text>
                                     <Text style={{ marginBottom: 10 }}></Text>
                                     <TextInput

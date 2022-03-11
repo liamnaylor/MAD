@@ -83,7 +83,8 @@ class HomeScreen extends Component {
         .then((response) => response.json())
         .then((responseJson) => {
           this.setState({
-            onePost: responseJson
+            onePost: responseJson,
+            modalVisible: true
           })
           console.log(responseJson)
           alert('The post you have selected: ' + JSON.stringify(responseJson))
@@ -334,6 +335,7 @@ class HomeScreen extends Component {
                             data={this.state.friendRequests}
                             renderItem={({ item }) => (
                                 <View>
+                                    <Text style = {styles.friendText}>Your Friend Requests</Text>
                                     <Text>{item.first_name} {item.last_name}</Text>
                                     <TouchableOpacity
                                         title="Accept Friend Request"
@@ -421,7 +423,7 @@ class HomeScreen extends Component {
                                       <Text>{item.first_name} {item.last_name}</Text>
                                       <Text>{item.text}</Text>
                                       <TouchableOpacity
-                                        onPress={() => this.displayModal(!this.state.modalVisible)}
+                                        onPress={() => this.displayModal(!this.state.modalVisible) }
                                       >
                                         <Text>Close</Text>
                                       </TouchableOpacity>

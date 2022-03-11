@@ -111,12 +111,14 @@ const styles = StyleSheet.create({
   },
 
   TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 20,
-    marginLeft: 20,
-    justifyContent: 'center',
-    flexDirection: 'row'
+    borderColor: 'black',
+    width: '100',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 30,
+    marginBottom: 5,
+    backgroundColor: '#DCDCDC'
   },
 
   loginBtn: {
