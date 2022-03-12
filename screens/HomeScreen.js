@@ -302,7 +302,6 @@ class HomeScreen extends Component {
 
     viewButton () {
       this.getSinglePost()
-      this.displayModal()
     }
 
     render () {
@@ -434,6 +433,33 @@ class HomeScreen extends Component {
                             keyExtractor={(user, index) => user.post_id.toString()}
 
                         />
+                    </View>
+                    <View>
+                      <FlatList
+                        data={this.state.onePost}
+                        renderItem={({ item }) => (
+                          <View>
+                            <TouchableOpacity
+                              onPress = {() => this.displayModal(true)}
+                            >
+                            </TouchableOpacity>
+                            <Modal
+                              animationType = {'slide'}
+                              transparent = {false}
+                              visible = {this.state.modalVisible}
+                              >
+                              <Text>{item.first_name} {item.last_name}</Text>
+                              <Text>{item.text}</Text>
+                              <TouchableOpacity
+                                onPress={() => this.displayModal(!this.state.modalVisible) }
+                              >
+                              <Text>Close</Text>
+                              </TouchableOpacity>
+                            </Modal>
+                          </View>
+                        )}
+                        keyExtractor={(user, index) => user.post_id.toString()}
+                      />
                     </View>
 
                 </ScrollView>
