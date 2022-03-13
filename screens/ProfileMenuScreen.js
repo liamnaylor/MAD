@@ -172,7 +172,7 @@ class ProfileScreenMenu extends Component {
                                 title="Upload Profile Picture Here"
                                 onPress={() => this.props.navigation.navigate('Profile')}
                             >
-                                <Text>Upload Profile Picture here</Text>
+                                <Text>Upload New Profile Picture here</Text>
                             </TouchableOpacity>
                         </View>
                         <View>
@@ -252,16 +252,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
-    backgroundColor: '#DDDCA1'
+    backgroundColor: '#DDDCA1',
+    borderWidth: 1
+
   },
 
   buttonUpload: {
-    width: '80%',
+    width: '80',
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-    backgroundColor: '#DDDCA1'
+    marginTop: 3,
+    backgroundColor: '#DDDCA1',
+    borderWidth: 1
   },
 
   image: {
