@@ -381,6 +381,7 @@ class HomeScreen extends Component {
                     <View style = {styles.container}>
                         <FlatList
                             data={this.state.friendPosts}
+                            extraData={this.state.onePost}
                             renderItem={({ item }) => (
                                 <View style = {styles.postContainer}>
                                     <Text style = {styles.divider}></Text>
@@ -419,10 +420,10 @@ class HomeScreen extends Component {
                                       transparent = {false}
                                       visible = {this.state.modalVisible}
                                     >
-                                      <Text>{item.first_name} {item.last_name}</Text>
+                                      <Text>{item.author.first_name} {item.author.last_name}:</Text>
                                       <Text>{item.text}</Text>
                                       <TouchableOpacity
-                                        onPress={() => this.displayModal(!this.state.modalVisible) }
+                                        onPress={() => this.displayModal(!this.state.modalVisible)}
                                       >
                                         <Text>Close</Text>
                                       </TouchableOpacity>
@@ -442,6 +443,7 @@ class HomeScreen extends Component {
                             <TouchableOpacity
                               onPress = {() => this.displayModal(true)}
                             >
+                              <Text>Show Post</Text>
                             </TouchableOpacity>
                             <Modal
                               animationType = {'slide'}
@@ -545,6 +547,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDCA1'
   },
   button3: {
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginLeft: 50,
+    flexDirection: 'row',
+    display: 'flex',
+    backgroundColor: '#FF9781'
+  },
+  backButton: {
     width: 100,
     height: 100,
     alignItems: 'center',

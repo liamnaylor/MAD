@@ -297,7 +297,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginLeft: 50,
     flexDirection: 'row',
-    backgroundColor: '#DDDCA1'
+    backgroundColor: '#DDDCA1',
+    borderWidth: 1
+
   },
   button2: {
     width: 100,

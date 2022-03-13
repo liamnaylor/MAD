@@ -129,7 +129,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: '#DDDCA1',
     flexDirection: 'row',
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    borderWidth: 1
   },
 
   title: {

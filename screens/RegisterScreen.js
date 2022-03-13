@@ -112,7 +112,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
     marginLeft: 25,
-    backgroundColor: '#DDDCA1'
+    backgroundColor: '#DDDCA1',
+    borderWidth: 1
+
   },
   textIn: {
     borderColor: 'black',

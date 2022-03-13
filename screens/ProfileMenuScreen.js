@@ -193,24 +193,28 @@ class ProfileScreenMenu extends Component {
                         </View>
                         <View>
                             <TextInput
+                                style={styles.textIn}
                                 placeholder="Update First Name Here"
                                 onChangeText={(first_name) => this.setState({ first_name })}
                             />
                         </View>
                         <View>
                             <TextInput
+                                style={styles.textIn}
                                 placeholder="Update Last Name Here"
                                 onChangeText={(last_name) => this.setState({ last_name })}
                             />
                         </View>
                         <View>
                             <TextInput
+                                style={styles.textIn}
                                 placeholder="Update Email Address Here"
                                 onChangeText={(email) => this.setState({ email })}
                             />
                         </View>
                         <View>
                             <TextInput
+                                style={styles.textIn}
                                 placeholder="Update Password Here"
                                 onChangeText={(password) => this.setState({ password })}
                             />
@@ -283,6 +287,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Sans-Serif',
     marginTop: 20,
     marginBottom: 10
+  },
+  textIn: {
+    borderColor: 'black',
+    width: '100',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 5,
+    backgroundColor: '#DCDCDC'
   }
 })
 

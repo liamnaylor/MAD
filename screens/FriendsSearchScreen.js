@@ -142,18 +142,6 @@ class FriendSearchScreen extends Component {
         })
     }
 
-    ItemView = ({ item }) => {
-      return (
-          // Flat List Item
-          <Text
-            onPress={() => getItem(item)}>
-            {item.id}
-            {'.'}
-            {item.title.toUpperCase()}
-          </Text>
-      )
-    };
-
     render () {
       if (this.state.isLoading) {
         return (
