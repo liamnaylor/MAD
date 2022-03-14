@@ -493,7 +493,7 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   getPostButton: {
-    width: '80%',
+    width: 200,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
@@ -529,8 +529,8 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,

@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
   },
   textIn: {
     borderColor: 'black',
-    width: '100',
+    width: 200,
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,

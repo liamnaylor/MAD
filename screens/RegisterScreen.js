@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 
   },
   createButton: {
-    width: '80%',
+    width: 200,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   textIn: {
     borderColor: 'black',
-    width: '100',
+    width: 200,
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,

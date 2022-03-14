@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
 
   loginBtn: {
-    width: '80%',
+    width: 235,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
