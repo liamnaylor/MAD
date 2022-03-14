@@ -174,7 +174,7 @@ class PostScreen extends Component {
                       <Text style = {styles.title}>Post Something</Text>
 
                       <TouchableOpacity
-                        style = {styles.button3}
+                        style = {styles.backButton}
                         title = "Back"
                         onPress={() => this.props.navigation.goBack()}
                       >
@@ -315,15 +315,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#DDDCA1'
   },
-  button3: {
-    width: 100,
-    height: 100,
+  backButton: {
+    width: 50,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,
     marginRight: 250,
     marginBottom: 20,
     flexDirection: 'row',
+    borderWidth: 1,
     backgroundColor: '#DDDCA1'
   },
 
@@ -348,7 +349,7 @@ const styles = StyleSheet.create({
   },
   textIn: {
     borderColor: 'black',
-    width: 100,
+    width: 250,
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,

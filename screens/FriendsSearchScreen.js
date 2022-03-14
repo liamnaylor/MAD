@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   button: {
-    width: '80%',
+    width: 225,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDCA1',
     flexDirection: 'row',
     display: 'flex',
+    borderWidth: 1,
     marginHorizontal: 20
   },
   input: {
