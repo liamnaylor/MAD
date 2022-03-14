@@ -108,7 +108,7 @@ class FriendSearchScreen extends Component {
       this.unsubscribe = this.props.navigation.addListener('focus', () => {
         this.checkLoggedIn()
       })
-      this.searchBar()
+      this.findFriends()
     }
 
     componentWillUnmount () {
@@ -166,7 +166,6 @@ class FriendSearchScreen extends Component {
                         placeholder="Search Here"
                         onChangeText={textToSearch => this.searchBar(textToSearch)}
                         underlineColorAndroid = 'transparent'
-                        value={textToSearch}
                       />
 
                       <FlatList

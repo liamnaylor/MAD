@@ -105,8 +105,6 @@ class HomeScreen extends Component {
       })
         .then((response) => {
           console.log('Post Liked!', response)
-
-          this.getOtherUserPosts()
           if (response.status === 400) {
             alert('YOU CAN ONLY LIKE THE POST ONE TIME')
           } else if (response.status === 200) {
@@ -198,7 +196,7 @@ class HomeScreen extends Component {
       })
         .then((response) => {
           console.log('You have a new friend' + response)
-          alert('You have accepted the friend request')
+          alert('You have a new friend!')
         })
         .catch((error) => {
           console.error(error)
@@ -310,11 +308,13 @@ class HomeScreen extends Component {
                 <ScrollView>
                     <View>
                         <Text style={styles.title}>Welcome to Spacebook</Text>
-                        <Button
-                            style={styles.logoutButton}
+                        <TouchableOpacity
+                            style={styles.navButton}
                             title="Logout"
                             onPress={() => this.logout()}
-                        />
+                        >
+                          <Text>Logout</Text>
+                        </TouchableOpacity>
                         <Button
                             title="Find Friends"
                             onPress={() => this.props.navigation.navigate('Search')}
@@ -572,6 +572,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     display: 'flex',
     backgroundColor: '#FF9781'
+  },
+  navButton: {
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginLeft: 50,
+    flexDirection: 'row',
+    display: 'flex',
+    backgroundColor: '#008080',
+    borderWidth: 1
   },
 
   title: {
