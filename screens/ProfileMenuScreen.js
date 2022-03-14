@@ -264,12 +264,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 20,
     marginTop: 3,
+    marginLeft: 10,
     backgroundColor: '#DDDCA1',
     borderWidth: 1
   },
 
   image: {
-    borderWidth: 5,
+    borderWidth: 1,
     borderRadius: 400 / 2,
     overflow: 'hidden',
     width: 200,
@@ -281,7 +282,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     fontFamily: 'Sans-Serif',
-    marginBottom: 20
+    marginBottom: 20,
+    marginLeft: 10
 
   },
   title2: {

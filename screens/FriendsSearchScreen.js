@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-throw-literal */
 /* eslint-disable camelcase */
@@ -17,7 +18,9 @@ class FriendSearchScreen extends Component {
       searchBarLoading: true,
       searchText: '',
       searchData: [],
-      textToSearch: ''
+      textToSearch: '',
+      data: [],
+      val: ''
 
     }
   }
@@ -121,8 +124,8 @@ class FriendSearchScreen extends Component {
       }
     }
 
-    searchBar=async (textToSearch) => {
-      this.setState({ textToSearch })
+    searchBar=async (val) => {
+      this.setState({ textToSearch: val })
       const token = await AsyncStorage.getItem('@session_token')
       return fetch('http://localhost:3333/api/1.0.0/search', {
         headers: {
@@ -134,7 +137,7 @@ class FriendSearchScreen extends Component {
         .then((responseJson) => {
           this.setState({
             isLoading: false,
-            searchData: responseJson.FriendSearchScreen
+            searchData: responseJson
           })
         })
         .catch((error) => {
@@ -165,6 +168,7 @@ class FriendSearchScreen extends Component {
                         placeholder="Search Here"
                         onChangeText={textToSearch => this.searchBar(textToSearch)}
                         underlineColorAndroid = 'transparent'
+                        value={this.state.textToSearch}
                       />
 
                       <FlatList

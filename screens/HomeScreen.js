@@ -333,16 +333,18 @@ class HomeScreen extends Component {
                         <FlatList
                             data={this.state.friendRequests}
                             renderItem={({ item }) => (
-                                <View>
+                                <View style = {styles.posts}>
                                     <Text style = {styles.friendText}>Your Friend Requests</Text>
-                                    <Text>{item.first_name} {item.last_name}</Text>
+                                    <Text style = {styles.friends}>{item.first_name} {item.last_name}</Text>
                                     <TouchableOpacity
+                                        style = {styles.getPostButton}
                                         title="Accept Friend Request"
                                         onPress={() => this.acceptFriendRequest(item.user_id)}
                                     >
                                         <Text>Accept Friend Request</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
+                                        style = {styles.getPostButton}
                                         title="Decline Friend Request"
                                         onPress={() => this.declineFriendRequest(item.user_id)}
                                     >
@@ -481,7 +483,8 @@ const styles = StyleSheet.create({
   friends: {
     fontFamily: 'helvetica',
     fontWeight: 'bold',
-    marginBottom: 20
+    marginBottom: 20,
+    marginTop: 20
   },
 
   postContainer: {
@@ -498,7 +501,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDCA1',
     flexDirection: 'row',
     display: 'flex',
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    borderWidth: 1
   },
   friendText: {
     fontWeight: 'bold',
@@ -533,7 +537,8 @@ const styles = StyleSheet.create({
     marginLeft: 50,
     flexDirection: 'row-reverse',
     display: 'flex',
-    backgroundColor: '#DDDCA1'
+    backgroundColor: '#DDDCA1',
+    borderWidth: 1
   },
   button2: {
     width: 100,
