@@ -247,18 +247,19 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    width: '80%',
+    width: 125,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
+    marginLeft: 50,
     backgroundColor: '#DDDCA1',
     borderWidth: 1
 
   },
 
   buttonUpload: {
-    width: '80',
+    width: 215,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',

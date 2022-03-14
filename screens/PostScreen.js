@@ -171,7 +171,7 @@ class PostScreen extends Component {
                 <SafeAreaView style={styles.container}>
                   <ScrollView>
                     <View>
-                      <Text style = {styles.title}>Your Posts</Text>
+                      <Text style = {styles.title}>Post Something</Text>
 
                       <TouchableOpacity
                         style = {styles.button3}
@@ -202,6 +202,7 @@ class PostScreen extends Component {
 
                     </View>
                     <View>
+                        <Text style = {styles.title2}>Your Previous Posts</Text>
                         <FlatList
                             data={this.state.allData}
                             renderItem={({ item }) => (
@@ -332,6 +333,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 20,
     textAlign: 'center'
+  },
+  title2: {
+    color: '#000',
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 30
   },
   divider: {
     height: 1,
