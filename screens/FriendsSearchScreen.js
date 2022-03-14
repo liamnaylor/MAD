@@ -18,10 +18,8 @@ class FriendSearchScreen extends Component {
       searchBarLoading: true,
       searchText: '',
       searchData: [],
-      textToSearch: '',
-      data: [],
-      val: ''
-
+      textToSearch: {},
+      data: []
     }
   }
 
@@ -124,8 +122,8 @@ class FriendSearchScreen extends Component {
       }
     }
 
-    searchBar=async (val) => {
-      this.setState({ textToSearch: val })
+    searchBar=async (textToSearch) => {
+      this.setState({ textToSearch })
       const token = await AsyncStorage.getItem('@session_token')
       return fetch('http://localhost:3333/api/1.0.0/search', {
         headers: {
@@ -168,7 +166,7 @@ class FriendSearchScreen extends Component {
                         placeholder="Search Here"
                         onChangeText={textToSearch => this.searchBar(textToSearch)}
                         underlineColorAndroid = 'transparent'
-                        value={this.state.textToSearch}
+                        value={textToSearch}
                       />
 
                       <FlatList

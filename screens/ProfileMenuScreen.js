@@ -264,7 +264,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 20,
     marginTop: 3,
-    marginLeft: 10,
     backgroundColor: '#DDDCA1',
     borderWidth: 1
   },

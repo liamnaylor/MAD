@@ -62,6 +62,7 @@ class PostScreen extends Component {
         .then((response) => {
           console.log('Posted', response)
           this.getPosts()
+          alert('New Post Added')
         })
         .catch((error) => {
           console.error(error)
@@ -126,7 +127,9 @@ class PostScreen extends Component {
         }
       })
         .then((response) => {
+          console.log(response)
           this.getPosts()
+          alert('Your Post has been removed')
         })
         .catch((error) => {
           console.log(error)
