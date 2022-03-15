@@ -163,6 +163,7 @@ class FriendSearchScreen extends Component {
                   <View>
                       <Text style = {styles.title}>Search for Friends</Text>
                       <TextInput
+                        style = {styles.TextInput}
                         placeholder="Search Here"
                         onChangeText={textToSearch => this.searchBar(textToSearch)}
                         underlineColorAndroid = 'transparent'
@@ -173,14 +174,14 @@ class FriendSearchScreen extends Component {
                           renderItem={({ item }) => (
 
                               <View>
-                                  <Text>{item.user_givenname} {item.user_familyname} {item.user_id}</Text>
+                                  <Text style = {styles.userResult}>{item.user_givenname} {item.user_familyname}</Text>
 
                                   <TouchableOpacity
                                       style={styles.button}
                                       title="Add Friend"
                                       onPress={() => this.addFriend(item.user_id)}
                                   >
-                                    <Text>Add Friend</Text>
+                                    <Text>Send Friend Request</Text>
                                   </TouchableOpacity>
                               </View>
                           )}
@@ -206,20 +207,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 20,
+    marginBottom: 30,
     backgroundColor: '#DDDCA1',
     flexDirection: 'row',
     display: 'flex',
     borderWidth: 1,
     marginHorizontal: 20
   },
-  input: {
+  TextInput: {
     borderColor: 'black',
-    width: 200,
+    width: 275,
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
-    marginBottom: 5,
+    marginTop: 30,
+    marginBottom: 30,
     backgroundColor: '#DCDCDC'
+  },
+  userResult: {
+    fontFamily: 'helvetica',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 10,
+    marginTop: 20
   },
   title: {
     color: '#000',

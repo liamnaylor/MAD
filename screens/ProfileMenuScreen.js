@@ -14,7 +14,6 @@ class ProfileScreenMenu extends Component {
     this.state = {
       isLoading: true,
       userDetails: [],
-
       photo: null
     }
   }

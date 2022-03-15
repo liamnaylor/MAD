@@ -5,7 +5,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Camera } from 'expo-camera'
 
@@ -93,7 +93,7 @@ class ProfileScreen extends Component {
         )
       } else {
         return (
-        <Text>No access to camera</Text>
+          <ActivityIndicator/>
         )
       }
     }

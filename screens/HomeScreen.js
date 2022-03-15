@@ -296,6 +296,22 @@ class HomeScreen extends Component {
       this.setState({
         modalVisible: show
       })
+      return (
+        <Modal>
+          <FlatList
+            data = {this.state.onePost}
+            renderItem = {({ item }) => (
+              <View>
+                <Text>{item.author.first_name} {item.author.last_name}:</Text>
+                <Text>{item.text}</Text>
+              </View>
+
+            )}
+              keyExtractor = {(user, index) => user.post_id.toString()}
+          />
+
+        </Modal>
+      )
     }
 
     viewButton () {
