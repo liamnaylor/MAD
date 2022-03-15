@@ -421,6 +421,7 @@ class HomeScreen extends Component {
                                       transparent = {false}
                                       visible = {this.state.modalVisible}
                                     >
+
                                         <Text>{item.author.first_name} {item.author.last_name}</Text>
                                         <Text>{item.text}</Text>
                                       <TouchableOpacity
