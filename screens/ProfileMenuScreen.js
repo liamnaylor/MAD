@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 30,
     fontWeight: 'bold',
-    fontFamily: 'Sans-Serif',
+    fontFamily: 'helvetica',
     marginBottom: 20,
     marginLeft: 10
 
@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 24,
     fontWeight: 'bold',
-    fontFamily: 'Sans-Serif',
+    fontFamily: 'helvetica',
     marginTop: 20,
     marginBottom: 10
   },

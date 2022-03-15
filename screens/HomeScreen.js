@@ -511,7 +511,7 @@ const styles = StyleSheet.create({
   },
   friendView: {
     fontWeight: 'bold',
-    fontFamily: 'sans-serif',
+    fontFamily: 'helvetica',
     fontSize: 24
   },
   image: {

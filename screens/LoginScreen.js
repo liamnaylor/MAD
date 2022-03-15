@@ -20,7 +20,8 @@ class LoginScreen extends Component {
       return fetch('http://localhost:3333/api/1.0.0/login', {
         method: 'post',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         },
         body: JSON.stringify(this.state)
       })
