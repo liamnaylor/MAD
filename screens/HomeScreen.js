@@ -383,7 +383,6 @@ class HomeScreen extends Component {
                     <View style = {styles.container}>
                         <FlatList
                             data={this.state.friendPosts}
-                            extraData={this.state.onePost}
                             renderItem={({ item }) => (
                                 <View style = {styles.postContainer}>
                                     <Text style = {styles.divider}></Text>
@@ -422,8 +421,8 @@ class HomeScreen extends Component {
                                       transparent = {false}
                                       visible = {this.state.modalVisible}
                                     >
-                                      <Text>{item.author.first_name} {item.author.last_name}:</Text>
-                                      <Text>{item.text}</Text>
+                                        <Text>{item.author.first_name} {item.author.last_name}</Text>
+                                        <Text>{item.text}</Text>
                                       <TouchableOpacity
                                         onPress={() => this.displayModal(!this.state.modalVisible)}
                                       >
@@ -436,34 +435,6 @@ class HomeScreen extends Component {
                             keyExtractor={(user, index) => user.post_id.toString()}
 
                         />
-                    </View>
-                    <View>
-                      <FlatList
-                        data={this.state.onePost}
-                        renderItem={({ item }) => (
-                          <View>
-                            <TouchableOpacity
-                              onPress = {() => this.displayModal(true)}
-                            >
-                              <Text>Show Post</Text>
-                            </TouchableOpacity>
-                            <Modal
-                              animationType = {'slide'}
-                              transparent = {false}
-                              visible = {this.state.modalVisible}
-                              >
-                              <Text>{item.first_name} {item.last_name}</Text>
-                              <Text>{item.text}</Text>
-                              <TouchableOpacity
-                                onPress={() => this.displayModal(!this.state.modalVisible) }
-                              >
-                              <Text>Close</Text>
-                              </TouchableOpacity>
-                            </Modal>
-                          </View>
-                        )}
-                        keyExtractor={(user, index) => user.post_id.toString()}
-                      />
                     </View>
 
                 </ScrollView>
