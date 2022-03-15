@@ -156,6 +156,17 @@ class PostScreen extends Component {
       this.unsubscribe()
     }
 
+    saveDraft = async (text) => {
+      const toSend = {
+        text: (this.state.text)
+      }
+      this.setState({
+        drafts: text,
+        body: JSON.stringify(toSend)
+      })
+      await AsyncStorage.setItem('@text')
+    }
+
     render () {
       if (this.state.isLoading) {
         return (
@@ -239,6 +250,7 @@ class PostScreen extends Component {
                     </View>
 
                     <View>
+                      <Text>Drafts</Text>
                         <FlatList
                             data={this.state.drafts}
                             renderItem={({ item }) => (

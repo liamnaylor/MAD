@@ -563,7 +563,7 @@ const styles = StyleSheet.create({
   },
   navButton: {
     width: 100,
-    height: 100,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,
