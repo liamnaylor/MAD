@@ -84,7 +84,7 @@ class FriendSearchScreen extends Component {
       const sendRequest = {
         user_id: this.state.user_id
       }
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/friends', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/friends', {
         method: 'POST',
         headers: {
           'X-Authorization': value,
@@ -94,9 +94,12 @@ class FriendSearchScreen extends Component {
       })
         .then((response) => {
           console.log('Friend Request Sent', response)
+
           this.findFriends()
           if (response.status === 403) {
             alert('YOU CANNOT SEND MORE THAN ONE FRIEND REQUEST')
+          } else if (response.status === 200) {
+            alert('Friend Request Sent')
           }
         })
         .catch((error) => {

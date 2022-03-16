@@ -74,7 +74,7 @@ class HomeScreen extends Component {
 
     getSinglePost=async (user_id, post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
         headers: {
           'X-Authorization': token,
           'Content-Type': 'application/json'
@@ -96,7 +96,7 @@ class HomeScreen extends Component {
 
     likePost=async (user_id, post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id + '/like', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/post/' + post_id + '/like', {
         method: 'POST',
         headers: {
           'X-Authorization': token,
@@ -110,6 +110,7 @@ class HomeScreen extends Component {
           } else if (response.status === 200) {
             alert('You have liked the post')
           }
+          this.getOtherUserPosts()
         })
         .catch((error) => {
           console.log('Something Went Wrong...')
@@ -119,7 +120,7 @@ class HomeScreen extends Component {
 
     removeLike=async (user_id, post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id + '/like', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/post/' + post_id + '/like', {
         method: 'DELETE',
         headers: {
           'X-Authorization': token,
@@ -139,7 +140,7 @@ class HomeScreen extends Component {
 
     getProfilePhoto=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/photo', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/photo', {
         method: 'GET',
         headers: {
           'X-Authorization': token,

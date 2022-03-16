@@ -175,7 +175,6 @@ class ProfileScreenMenu extends Component {
                             </TouchableOpacity>
                         </View>
                         <View>
-                            <Text>Hello</Text>
                             <FlatList
                                 data={this.state.userDetails}
                                 renderItem={({ item }) => (
