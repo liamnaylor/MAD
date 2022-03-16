@@ -385,7 +385,7 @@ class HomeScreen extends Component {
                             renderItem={({ item }) => (
                                 <View style = {styles.postContainer}>
                                     <Text style = {styles.postAuthor}>{item.author.first_name} {item.author.last_name} Posted:</Text>
-                                    <Text style={styles.posts}>{item.author.first_name} {item.author.last_name} Says - {item.text} Likes: {item.numLikes}
+                                    <Text style={styles.posts}>{item.text} Likes: {item.numLikes}
                                     </Text>
                                     <TouchableOpacity
                                         style = {styles.button}
