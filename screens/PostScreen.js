@@ -22,7 +22,7 @@ class PostScreen extends Component {
     logout = async () => {
       const token = await AsyncStorage.getItem('@session_token')
       await AsyncStorage.removeItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/logout', {
+      return fetch('http://192.168.1.3:3333/api/1.0.0/logout', {
         method: 'POST',
         headers: {
           'X-Authorization': token
@@ -50,7 +50,7 @@ class PostScreen extends Component {
         text: (this.state.text)
       }
 
-      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/post', {
+      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post', {
         method: 'POST',
         headers: {
           'X-Authorization': token,
@@ -72,7 +72,7 @@ class PostScreen extends Component {
     getPosts=async () => {
       const token = await AsyncStorage.getItem('@session_token')
       const user_id = await AsyncStorage.getItem('@user_id')
-      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/post/', {
+      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/', {
         headers: {
           'X-Authorization': token,
           'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ class PostScreen extends Component {
       const toUpdate = {
         text: this.state.text
       }
-      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
+      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
         method: 'PATCH',
         headers: {
           'X-Authorization': token,
@@ -119,7 +119,7 @@ class PostScreen extends Component {
     deletePost=async (post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
       const user_id = await AsyncStorage.getItem('@user_id')
-      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
+      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
         method: 'DELETE',
         headers: {
           'X-Authorization': token,

@@ -42,7 +42,7 @@ class ProfileScreen extends Component {
     const res = await fetch(data.base64)
     const blob = await res.blob()
 
-    return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/photo', {
+    return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/photo', {
       method: 'POST',
       headers: {
         'Content-Type': 'image/png',
