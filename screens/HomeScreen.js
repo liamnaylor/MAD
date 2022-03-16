@@ -49,7 +49,7 @@ class HomeScreen extends Component {
 
     getOtherUserPosts=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/', {
+      return fetch('http:/192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/', {
         headers: {
           'X-Authorization': token,
           'Content-Type': 'application/json'
@@ -316,19 +316,27 @@ class HomeScreen extends Component {
                         >
                           <Text>Logout</Text>
                         </TouchableOpacity>
-                        <Button
+                        <TouchableOpacity
+                            style={styles.navButton}
                             title="Find Friends"
                             onPress={() => this.props.navigation.navigate('Search')}
-                        />
-                        <Button
-                            title="Your Details"
-                            onPress={() => this.props.navigation.navigate('Your Details')}
-                        />
-                        <Button
-                            style={{ marginBottom: 20 }}
+                        >
+                        <Text>Find Friends</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style = {styles.navButton}
+                          title = "Your Details"
+                          onPress = {() => this.props.navigation.navigate('Your Details')}
+                        >
+                        <Text>Your Details</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.navButton}
                             title="Post"
                             onPress={() => this.props.navigation.navigate('Post')}
-                        />
+                        >
+                          <Text>Post</Text>
+                        </TouchableOpacity>
                     </View>
                     <View>
                         <FlatList

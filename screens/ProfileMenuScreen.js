@@ -142,10 +142,7 @@ class ProfileScreenMenu extends Component {
       if (this.state.isLoading) {
         return (
                 <View>
-                    <ActivityIndicator
-                        size="large"
-                        color="#00ff00"
-                    />
+                    <ActivityIndicator/>
                 </View>
         )
       } else {
@@ -161,6 +158,7 @@ class ProfileScreenMenu extends Component {
                                 source={{
                                   uri: this.state.photo
                                 }}
+                                resizeMode = 'contain'
 
                             />
 
