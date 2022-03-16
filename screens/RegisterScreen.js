@@ -6,6 +6,7 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, ScrollView, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native'
 
+// Register screen registers user account through a post request to the api as seen in the 'reg' function
 class RegisterScreen extends Component {
   constructor (props) {
     super(props)
@@ -47,6 +48,9 @@ class RegisterScreen extends Component {
 
     render () {
       return (
+      // Various text inputs have been established in the program as seen below
+      // to correctly register the users' details including first name, last name,
+      // email address and password
             <SafeAreaView style = {styles.container}>
                 <ScrollView>
                     <View>

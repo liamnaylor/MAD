@@ -223,7 +223,7 @@ class PostScreen extends Component {
                                     <Text style={{ marginBottom: 10 }}></Text>
                                     <TextInput
                                         style = {styles.textIn}
-                                        placeholder="Enter Text here and press 'Submit' to update this post"
+                                        placeholder="Edit Post"
                                         onChangeText={(text) => this.setState({ text })}
                                     />
                                     <TouchableOpacity

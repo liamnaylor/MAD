@@ -127,7 +127,8 @@ class ProfileScreenMenu extends Component {
           return res.blob()
         })
         .then((resBlob) => {
-          const data = URL.createObjectURL(resBlob)
+          // eslint-disable-next-line prefer-const
+          let data = URL.createObjectURL(resBlob)
           this.setState({
             photo: data,
             isLoading: false
@@ -158,8 +159,6 @@ class ProfileScreenMenu extends Component {
                                 source={{
                                   uri: this.state.photo
                                 }}
-                                resizeMode = 'contain'
-
                             />
 
                         </View>
@@ -248,7 +247,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
-    marginLeft: 50,
+    marginLeft: 30,
     backgroundColor: '#DDDCA1',
     borderWidth: 1
 

@@ -4,10 +4,9 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import { Text, ScrollView, Button, FlatList, View, TextInput, StyleSheet, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { SearchBar } from 'react-native-elements'
 
 class FriendSearchScreen extends Component {
   constructor (props) {

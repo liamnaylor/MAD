@@ -26,6 +26,12 @@ class HomeScreen extends Component {
     }
   }
 
+  // There are many functions throughout this component that interact with the api including
+  // all interaction regarding friends, friend requests and interaction with other user posts.
+
+  // The componentDidMount function is a core function that will complete the specified function
+  // once the component has been mounted
+
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.checkLoggedIn()
@@ -49,7 +55,7 @@ class HomeScreen extends Component {
 
     getOtherUserPosts=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http:/192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/', {
+      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/', {
         headers: {
           'X-Authorization': token,
           'Content-Type': 'application/json'
@@ -299,13 +305,13 @@ class HomeScreen extends Component {
       })
     }
 
-    viewButton () {
-      this.getSinglePost()
-    }
-
     render () {
       return (
+      // Flatlists have been used throughout this component to display each record that is stored in the api
+      // about the user including friends and outstanding friend requests.
+
             <SafeAreaView style={styles.container}>
+
                 <ScrollView>
                     <View>
                         <Text style={styles.title}>Welcome to Spacebook</Text>
@@ -500,7 +506,7 @@ const styles = StyleSheet.create({
   posts: {
     padding: 2,
     flex: 1,
-    marginTop: 30,
+    marginTop: 20,
     fontWeight: 'bold',
     fontSize: 16,
     fontFamily: 'helvetica'
@@ -512,7 +518,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,
-    marginLeft: 50,
     flexDirection: 'row-reverse',
     display: 'flex',
     backgroundColor: '#DDDCA1',
