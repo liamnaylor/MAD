@@ -21,7 +21,7 @@ class ProfileScreenMenu extends Component {
     logout = async () => {
       const token = await AsyncStorage.getItem('@session_token')
       await AsyncStorage.removeItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/logout', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/logout', {
         method: 'POST',
         headers: {
           'X-Authorization': token
@@ -116,7 +116,7 @@ class ProfileScreenMenu extends Component {
     retrievePhoto=async () => {
       const token = await AsyncStorage.getItem('@session_token')
       const user_id = await AsyncStorage.getItem('@user_id')
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/photo', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/photo', {
         method: 'GET',
         headers: {
           'X-Authorization': token,

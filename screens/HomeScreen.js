@@ -341,14 +341,14 @@ class HomeScreen extends Component {
                                         title="Accept Friend Request"
                                         onPress={() => this.acceptFriendRequest(item.user_id)}
                                     >
-                                        <Text>Accept Friend Request</Text>
+                                        <Text>Accept</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style = {styles.getPostButton}
                                         title="Decline Friend Request"
                                         onPress={() => this.declineFriendRequest(item.user_id)}
                                     >
-                                        <Text>Decline Friend Request</Text>
+                                        <Text>Decline</Text>
                                     </TouchableOpacity>
 
                                 </View>
@@ -359,11 +359,9 @@ class HomeScreen extends Component {
                     <View>
                         <Text style={styles.friendText}>Your Friends</Text>
                         <FlatList
-                            style={styles.posts}
                             data={this.state.friends}
-
                             renderItem={({ item }) => (
-                                <View>
+                                <View style = {styles.posts}>
                                     <Text style = {styles.friends}>{item.user_givenname} {item.user_familyname}</Text>
 
                                     <TouchableOpacity
