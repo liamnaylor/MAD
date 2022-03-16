@@ -28,6 +28,7 @@ class RegisterScreen extends Component {
       })
         .then((response) => {
           if (response.status === 201) {
+            alert('You have successfully created an account')
             return response.json()
           } else if (response.status === 400) {
             throw 'Failed validation'

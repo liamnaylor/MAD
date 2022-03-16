@@ -383,8 +383,7 @@ class HomeScreen extends Component {
                             data={this.state.friendPosts}
                             renderItem={({ item }) => (
                                 <View style = {styles.postContainer}>
-                                    <Text style = {styles.divider}></Text>
-
+                                    <Text style = {styles.postAuthor}>{item.author.first_name} {item.author.last_name}s Post</Text>
                                     <Text style={styles.posts}>{item.author.first_name} {item.author.last_name} Says - {item.text} Likes: {item.numLikes}
                                     </Text>
                                     <TouchableOpacity
@@ -567,6 +566,12 @@ const styles = StyleSheet.create({
     width: 100,
     backgroundColor: '#ffffff',
     marginBottom: 30
+  },
+  postAuthor: {
+    color: '#000',
+    fontSize: 14,
+    fontWeight: 'bold',
+    fontStyle: 'italic'
   }
 
 })
