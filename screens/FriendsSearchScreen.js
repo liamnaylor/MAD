@@ -53,7 +53,7 @@ class FriendSearchScreen extends Component {
 
     findFriends= async () => {
       const value = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/search', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/search', {
         headers: {
           'X-Authorization': value
         }
@@ -125,7 +125,7 @@ class FriendSearchScreen extends Component {
     searchBar=async (textToSearch) => {
       this.setState({ textToSearch })
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/search', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/search', {
         headers: {
           'X-Authorization': token,
           'Content-Type': 'application/json'

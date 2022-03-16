@@ -49,7 +49,7 @@ class HomeScreen extends Component {
 
     getOtherUserPosts=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/post/', {
         headers: {
           'X-Authorization': token,
           'Content-Type': 'application/json'
@@ -164,7 +164,7 @@ class HomeScreen extends Component {
     logout = async () => {
       const token = await AsyncStorage.getItem('@session_token')
       await AsyncStorage.removeItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/logout', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/logout', {
         method: 'POST',
         headers: {
           'X-Authorization': token
@@ -187,7 +187,7 @@ class HomeScreen extends Component {
 
     acceptFriendRequest=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/friendrequests/' + user_id, {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/friendrequests/' + user_id, {
         method: 'POST',
         headers: {
           'X-Authorization': token,
@@ -205,7 +205,7 @@ class HomeScreen extends Component {
 
     declineFriendRequest=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/friendrequests/' + user_id, {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/friendrequests/' + user_id, {
         method: 'DELETE',
         headers: {
           'X-Authorization': token,
@@ -235,7 +235,7 @@ class HomeScreen extends Component {
 
     getFriendRequests=async () => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/friendrequests', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/friendrequests', {
         method: 'GET',
         headers: {
           'X-Authorization': token,
@@ -258,7 +258,7 @@ class HomeScreen extends Component {
     getFriends=async () => {
       const token = await AsyncStorage.getItem('@session_token')
       const user_id = await AsyncStorage.getItem('@user_id')
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/friends', {
+      return fetch('http://10.182.80.49:3333/api/1.0.0/user/' + user_id + '/friends', {
         method: 'GET',
         headers: {
           'X-Authorization': token,
@@ -296,22 +296,6 @@ class HomeScreen extends Component {
       this.setState({
         modalVisible: show
       })
-      return (
-        <Modal>
-          <FlatList
-            data = {this.state.onePost}
-            renderItem = {({ item }) => (
-              <View>
-                <Text>{item.author.first_name} {item.author.last_name}:</Text>
-                <Text>{item.text}</Text>
-              </View>
-
-            )}
-              keyExtractor = {(user, index) => user.post_id.toString()}
-          />
-
-        </Modal>
-      )
     }
 
     viewButton () {
