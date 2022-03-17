@@ -4,6 +4,7 @@ import RegisterScreen from './screens/RegisterScreen'
 import LoginScreen from './screens/LoginScreen'
 import React, { Component } from 'react'
 import { TabNav } from './TabNavigator'
+import ProfileScreen from './screens/ProfileScreen'
 
 const Stack = createNativeStackNavigator()
 /* The app component is where all relevant screens are passed into to create the program flow */
@@ -21,6 +22,10 @@ class App extends Component {
             name='RegisterScreen'
             component={RegisterScreen}
             options={{ title: 'Register' }}
+          />
+          <Stack.Screen
+            name = 'Profile'
+            component = {ProfileScreen}
           />
           <Stack.Screen
             name='Home'

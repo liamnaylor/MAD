@@ -310,27 +310,6 @@ class HomeScreen extends Component {
                         >
                           <Text>Logout</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.navButton}
-                            title="Find Friends"
-                            onPress={() => this.props.navigation.navigate('Search')}
-                        >
-                        <Text>Find Friends</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style = {styles.navButton}
-                          title = "Your Details"
-                          onPress = {() => this.props.navigation.navigate('Your Details')}
-                        >
-                        <Text>Your Details</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.navButton}
-                            title="Post"
-                            onPress={() => this.props.navigation.navigate('Post')}
-                        >
-                          <Text>Post</Text>
-                        </TouchableOpacity>
                     </View>
                     <View>
                         <FlatList
@@ -442,7 +421,9 @@ const styles = StyleSheet.create({
 
   postContainer: {
     backgroundColor: '#FFFFFF',
-    borderWidth: 1
+    borderWidth: 1,
+    paddingLeft: 8,
+    paddingStart: 5
   },
   getPostButton: {
     width: 200,
