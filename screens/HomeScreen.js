@@ -55,7 +55,7 @@ class HomeScreen extends Component {
 
     getOtherUserPosts=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/', {
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/', {
         headers: {
           'X-Authorization': token,
           'Content-Type': 'application/json'
@@ -79,7 +79,7 @@ class HomeScreen extends Component {
 
     getSinglePost=async (user_id, post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
         headers: {
           'X-Authorization': token,
           'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ class HomeScreen extends Component {
 
     likePost=async (user_id, post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/' + post_id + '/like', {
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id + '/like', {
         method: 'POST',
         headers: {
           'X-Authorization': token,
@@ -125,7 +125,7 @@ class HomeScreen extends Component {
 
     removeLike=async (user_id, post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/' + post_id + '/like', {
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id + '/like', {
         method: 'DELETE',
         headers: {
           'X-Authorization': token,
@@ -145,7 +145,7 @@ class HomeScreen extends Component {
 
     getProfilePhoto=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/photo', {
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/photo', {
         method: 'GET',
         headers: {
           'X-Authorization': token,
@@ -170,7 +170,7 @@ class HomeScreen extends Component {
     logout = async () => {
       const token = await AsyncStorage.getItem('@session_token')
       await AsyncStorage.removeItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/logout', {
+      return fetch('http://localhost:3333/api/1.0.0/logout', {
         method: 'POST',
         headers: {
           'X-Authorization': token
@@ -193,7 +193,7 @@ class HomeScreen extends Component {
 
     acceptFriendRequest=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/friendrequests/' + user_id, {
+      return fetch('http://localhost:3333/api/1.0.0/friendrequests/' + user_id, {
         method: 'POST',
         headers: {
           'X-Authorization': token,
@@ -211,7 +211,7 @@ class HomeScreen extends Component {
 
     declineFriendRequest=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/friendrequests/' + user_id, {
+      return fetch('http://localhost:3333/api/1.0.0/friendrequests/' + user_id, {
         method: 'DELETE',
         headers: {
           'X-Authorization': token,
@@ -241,7 +241,7 @@ class HomeScreen extends Component {
 
     getFriendRequests=async () => {
       const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/friendrequests', {
+      return fetch('http://localhost:3333/api/1.0.0/friendrequests', {
         method: 'GET',
         headers: {
           'X-Authorization': token,
@@ -406,8 +406,9 @@ class HomeScreen extends Component {
                                     >
                                         <Text>Like Post</Text>
                                     </TouchableOpacity>
+
                                     <TouchableOpacity
-                                        style={styles.button}
+                                        style={styles.button2}
                                         title="Remove Like"
                                         onPress={() => this.removeLike(item.author.user_id, item.post_id)}
                                     >
@@ -415,32 +416,12 @@ class HomeScreen extends Component {
                                     </TouchableOpacity>
 
                                     <TouchableOpacity
-                                        style={styles.button}
+                                        style={styles.button3}
                                         title="View Post"
                                         onPress={() => this.getSinglePost(item.author.user_id, item.post_id)}
                                     >
                                       <Text>View Post</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity
-                                      onPress={() => this.displayModal(true)}
-                                    >
-                                      <Text>Modal</Text>
-                                    </TouchableOpacity>
-                                    <Modal
-                                      animationType = {'slide'}
-                                      transparent = {false}
-                                      visible = {this.state.modalVisible}
-                                    >
-
-                                        <Text>{item.author.first_name} {item.author.last_name}</Text>
-                                        <Text>{item.text}</Text>
-                                      <TouchableOpacity
-                                        onPress={() => this.displayModal(!this.state.modalVisible)}
-                                      >
-                                        <Text>Close</Text>
-                                      </TouchableOpacity>
-                                    </Modal>
-                                    <Text style={styles.divider}></Text>
                                 </View>
                             )}
                             keyExtractor={(user, index) => user.post_id.toString()}
@@ -471,7 +452,6 @@ const styles = StyleSheet.create({
 
   postContainer: {
     backgroundColor: '#FFFFFF',
-    alignItems: 'center',
     borderWidth: 1
   },
   getPostButton: {
@@ -511,37 +491,43 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    width: 200,
-    height: 50,
+    width: 75,
+    height: 75,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    flexDirection: 'row',
+    display: 'flex',
+    backgroundColor: '#DDDCA1',
+    borderWidth: 1,
+    flex: 2,
+    paddingHorizontal: 6,
+    paddingVertical: 4
+  },
+  button2: {
+    width: 100,
+    height: 75,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    flexDirection: 'row',
+    display: 'flex',
+    backgroundColor: '#DDDCA1',
+    borderWidth: 1,
+    flex: 2
+  },
+  button3: {
+    width: 75,
+    height: 75,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 5,
     flexDirection: 'row-reverse',
     display: 'flex',
     backgroundColor: '#DDDCA1',
-    borderWidth: 1
-  },
-  button2: {
-    width: 100,
-    height: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 5,
-    marginLeft: 50,
-    flexDirection: 'row',
-    display: 'flex',
-    backgroundColor: '#DDDCA1'
-  },
-  button3: {
-    width: 100,
-    height: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 5,
-    marginLeft: 50,
-    flexDirection: 'row',
-    display: 'flex',
-    backgroundColor: '#FF9781'
+    borderWidth: 1,
+    flex: 2,
+    marginBottom: 20
   },
   backButton: {
     width: 100,

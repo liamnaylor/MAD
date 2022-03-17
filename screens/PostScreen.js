@@ -22,7 +22,7 @@ class PostScreen extends Component {
     logout = async () => {
       const token = await AsyncStorage.getItem('@session_token')
       await AsyncStorage.removeItem('@session_token')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/logout', {
+      return fetch('http://localhost:3333/api/1.0.0/logout', {
         method: 'POST',
         headers: {
           'X-Authorization': token
@@ -50,7 +50,7 @@ class PostScreen extends Component {
         text: (this.state.text)
       }
 
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post', {
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post', {
         method: 'POST',
         headers: {
           'X-Authorization': token,
@@ -72,7 +72,7 @@ class PostScreen extends Component {
     getPosts=async () => {
       const token = await AsyncStorage.getItem('@session_token')
       const user_id = await AsyncStorage.getItem('@user_id')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/', {
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/', {
         headers: {
           'X-Authorization': token,
           'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ class PostScreen extends Component {
       const toUpdate = {
         text: this.state.text
       }
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id, {
         method: 'PATCH',
         headers: {
           'X-Authorization': token,
@@ -156,15 +156,19 @@ class PostScreen extends Component {
       this.unsubscribe()
     }
 
-    saveDraft = async (text) => {
+    saveDraft = async () => {
       const toSend = {
         text: (this.state.text)
       }
       this.setState({
-        drafts: text,
+        drafts: toSend,
         body: JSON.stringify(toSend)
       })
-      await AsyncStorage.setItem('@text')
+      console.log(toSend)
+    }
+
+    displayDraft = async () => {
+      draftText = await AsyncStorage.getItem('@text')
     }
 
     render () {
@@ -251,16 +255,13 @@ class PostScreen extends Component {
 
                     <View>
                       <Text>Drafts</Text>
-                        <FlatList
-                            data={this.state.drafts}
-                            renderItem={({ item }) => (
-                                <View>
-                                    <Text>{item.text}</Text>
-                                </View>
-                            )}
-
-                        />
-
+                      <FlatList
+                        data = {this.state.drafts}
+                        renderItem={({ item }) => (
+                          <Text>{item.text}</Text>
+                        )}
+                      />
+                      <Text></Text>
                     </View>
                   </ScrollView>
                 </SafeAreaView>

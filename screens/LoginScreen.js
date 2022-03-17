@@ -47,6 +47,8 @@ class LoginScreen extends Component {
           console.log(error)
         })
     }
+    // Render/return is the function that displays all elements inside in a visual format and
+    // for this component includes all text input and buttons to login.
 
     render () {
       return (
@@ -79,7 +81,7 @@ class LoginScreen extends Component {
                     </View>
                     <View>
                         <TouchableOpacity
-                            style={styles.loginBtn}
+                            style={styles.regBtn}
                             title="Register"
                             onPress={() => this.props.navigation.navigate('RegisterScreen')}
                         >
@@ -133,6 +135,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: '#DDDCA1',
     flexDirection: 'row',
+    marginBottom: 20,
+    marginHorizontal: 20,
+    borderWidth: 1
+  },
+  regBtn: {
+    width: 235,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    backgroundColor: '#DDDCA1',
+    flexDirection: 'row',
     marginHorizontal: 20,
     borderWidth: 1
   },
@@ -141,7 +155,9 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 30,
     fontWeight: 'bold',
-    fontFamily: 'helvetica'
+    fontFamily: 'helvetica',
+    marginTop: 50,
+    marginBottom: 40
 
   }
 })
