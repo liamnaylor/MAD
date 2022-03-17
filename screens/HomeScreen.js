@@ -75,7 +75,7 @@ class HomeScreen extends Component {
 
           })
           console.log(responseJson)
-          alert('Posts Successfully Retrieved')
+          alert('Posts Successfully Retrieved, Scroll down to view them')
         })
         .catch((error) => {
           console.log(error)

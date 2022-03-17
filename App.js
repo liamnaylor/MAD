@@ -6,7 +6,7 @@ import React, { Component } from 'react'
 import { TabNav } from './TabNavigator'
 
 const Stack = createNativeStackNavigator()
-
+/* The app component is where all relevant screens are passed into to create the program flow */
 class App extends Component {
   render () {
     return (

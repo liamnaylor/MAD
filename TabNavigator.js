@@ -7,6 +7,11 @@ import HomeScreen from './screens/HomeScreen'
 
 const Tab = createBottomTabNavigator()
 
+/* This function is used to create the tab navigation system to cycle between the implemented pages.
+   It works by passing the relevant components and sorting them into separate screens similar to the
+   stack navigator.
+*/
+
 const TabNav = () => {
   return (
     <Tab.Navigator>
