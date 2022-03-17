@@ -264,7 +264,7 @@ class HomeScreen extends Component {
     getFriends=async () => {
       const token = await AsyncStorage.getItem('@session_token')
       const user_id = await AsyncStorage.getItem('@user_id')
-      return fetch('http://192.168.1.3:3333/api/1.0.0/user/' + user_id + '/friends', {
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/friends', {
         method: 'GET',
         headers: {
           'X-Authorization': token,

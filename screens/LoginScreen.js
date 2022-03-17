@@ -21,7 +21,7 @@ class LoginScreen extends Component {
 
   // AsyncStorage has been used in the method to set the authentication values
     signIn = async () => {
-      return fetch('http://192.168.1.3:3333/api/1.0.0/login', {
+      return fetch('http://localhost:3333/api/1.0.0/login', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
