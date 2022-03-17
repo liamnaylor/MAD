@@ -99,6 +99,11 @@ class HomeScreen extends Component {
         })
     }
 
+    // The like, remove like and view post methods are all used to perform actions on what the users' friends
+    // have posted onto the platform.
+    // Calling the variables when defining the function ensures that information regarding posts is acted upon
+    // dynamically
+
     likePost=async (user_id, post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
       return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/post/' + post_id + '/like', {
@@ -115,7 +120,6 @@ class HomeScreen extends Component {
           } else if (response.status === 200) {
             alert('You have liked the post')
           }
-          this.getOtherUserPosts()
         })
         .catch((error) => {
           console.log('Something Went Wrong...')
@@ -140,30 +144,6 @@ class HomeScreen extends Component {
         })
         .catch((error) => {
           console.log(error)
-        })
-    }
-
-    getProfilePhoto=async (user_id) => {
-      const token = await AsyncStorage.getItem('@session_token')
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/photo', {
-        method: 'GET',
-        headers: {
-          'X-Authorization': token,
-          'Content-Type': 'image/png'
-        }
-      })
-        .then((res) => {
-          return res.blob()
-        })
-        .then((resBlob) => {
-          const data = URL.createObjectURL(resBlob)
-          this.setState({
-            photo: data,
-            isLoading: false
-          })
-        })
-        .catch((error) => {
-          console.log('Error Occurred', error)
         })
     }
 
@@ -220,6 +200,7 @@ class HomeScreen extends Component {
       })
         .then((response) => {
           this.getFriendRequests()
+          console.log(response)
           alert('You have rejected the friend request.')
         })
         .catch((error) => {
@@ -260,6 +241,9 @@ class HomeScreen extends Component {
           console.log(error)
         })
     }
+
+    // This method retrieves all friends associated with the user (friend request accepted needs to be met.)
+    // in which the response is set as the current state for the 'friends' array.
 
     getFriends=async () => {
       const token = await AsyncStorage.getItem('@session_token')
