@@ -7,6 +7,12 @@
 import React, { Component } from 'react'
 import { Text, ScrollView, Button, FlatList, StyleSheet, SafeAreaView, View, TouchableOpacity, Modal, Dimensions } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+/* import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Ionicons from 'react-native-vector-icons'
+import { NavigationContainer } from '@react-navigation/native'
+import ProfileScreenMenu from './ProfileMenuScreen'
+import PostScreen from './PostScreen'
+import FriendSearchScreen from './FriendsSearchScreen' */
 
 class HomeScreen extends Component {
   constructor (props) {
