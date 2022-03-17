@@ -1,6 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-
 import RegisterScreen from './screens/RegisterScreen'
 import LoginScreen from './screens/LoginScreen'
 import HomeScreen from './screens/HomeScreen'
@@ -8,8 +7,8 @@ import FriendSearchScreen from './screens/FriendsSearchScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import PostScreen from './screens/PostScreen'
 import ProfileScreenMenu from './screens/ProfileMenuScreen'
-
 import React, { Component } from 'react'
+
 const Stack = createNativeStackNavigator()
 
 class App extends Component {
@@ -59,6 +58,7 @@ class App extends Component {
         </Stack.Navigator>
 
       </NavigationContainer>
+
     )
   }
 }

@@ -310,7 +310,6 @@ class HomeScreen extends Component {
       // about the user including friends and outstanding friend requests.
 
             <SafeAreaView style={styles.container}>
-
                 <ScrollView>
                     <View>
                         <Text style={styles.title}>Welcome to Spacebook</Text>
@@ -565,7 +564,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     display: 'flex',
     backgroundColor: '#008080',
-    borderWidth: 1
+    borderWidth: 1,
+    flex: 1
   },
 
   title: {
