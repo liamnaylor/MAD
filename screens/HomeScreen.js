@@ -30,7 +30,7 @@ class HomeScreen extends Component {
   // all interaction regarding friends, friend requests and interaction with other user posts.
 
   // The componentDidMount function is a core function that will complete the specified function
-  // once the component has been mounted
+  // once the component has been mounted.
 
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
@@ -69,12 +69,11 @@ class HomeScreen extends Component {
 
           })
           console.log(responseJson)
-          if (responseJson === null) {
-            alert('This user has not posted anything yet.')
-          }
+          alert('Posts Successfully Retrieved')
         })
         .catch((error) => {
           console.log(error)
+          alert(error)
         })
     }
 

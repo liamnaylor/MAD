@@ -51,6 +51,7 @@ class RegisterScreen extends Component {
       // Various text inputs have been established in the program as seen below
       // to correctly register the users' details including first name, last name,
       // email address and password
+
             <SafeAreaView style = {styles.container}>
                 <ScrollView>
                     <View>

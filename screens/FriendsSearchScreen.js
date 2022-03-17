@@ -49,6 +49,7 @@ class FriendSearchScreen extends Component {
     getFlatListName (user_givenname, user_familyname) {
       alert(user_givenname, user_familyname)
     }
+    // The findFriends function retrieves a list of users from the
 
     findFriends= async () => {
       const value = await AsyncStorage.getItem('@session_token')

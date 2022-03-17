@@ -16,6 +16,10 @@ class LoginScreen extends Component {
     }
   }
 
+  // The signIn function sends the body of text contained in the appropriate text inputs for the render function
+  // and is then verified by the api to grant access to the user.
+
+  // AsyncStorage has been used in the method to set the authentication values
     signIn = async () => {
       return fetch('http://192.168.1.3:3333/api/1.0.0/login', {
         method: 'post',
