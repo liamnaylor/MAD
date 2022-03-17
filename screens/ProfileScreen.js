@@ -53,6 +53,7 @@ class ProfileScreen extends Component {
       .then((response) => {
         console.log('Picture added', response)
         alert('You have uploaded a new profile picture successfully')
+        this.retrievePhoto()
       })
       .catch((err) => {
         console.log('I am sorry, there is an issue with the image you are attempting to upload.', err)
@@ -68,6 +69,31 @@ class ProfileScreen extends Component {
         }
         await this.camera.takePictureAsync(options)
       }
+    }
+
+    retrievePhoto=async () => {
+      const token = await AsyncStorage.getItem('@session_token')
+      const user_id = await AsyncStorage.getItem('@user_id')
+      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/photo', {
+        method: 'GET',
+        headers: {
+          'X-Authorization': token,
+          'Content-Type': 'image/png'
+        }
+      })
+        .then((res) => {
+          return res.blob()
+        })
+        .then((resBlob) => {
+          const data = URL.createObjectURL(resBlob)
+          this.setState({
+            photo: data,
+            isLoading: false
+          })
+        })
+        .catch((error) => {
+          console.log('Error Occurred', error)
+        })
     }
 
     render () {

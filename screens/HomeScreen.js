@@ -500,9 +500,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     backgroundColor: '#DDDCA1',
     borderWidth: 1,
-    flex: 2,
-    paddingHorizontal: 6,
-    paddingVertical: 4
+    flex: 5
   },
   button2: {
     width: 100,
@@ -514,7 +512,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     backgroundColor: '#DDDCA1',
     borderWidth: 1,
-    flex: 2
+    flex: 5
   },
   button3: {
     width: 75,
@@ -526,7 +524,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     backgroundColor: '#DDDCA1',
     borderWidth: 1,
-    flex: 2,
+    flex: 5,
     marginBottom: 20
   },
   backButton: {
