@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator()
 /* The app component is where all relevant screens are passed into to create the program flow
 
    The bottom tab navigation feature has been imported from the TabNavigator.js file and passed
-   as a stack screen to
+   as a stack screen
 */
 class App extends Component {
   render () {
@@ -20,6 +20,12 @@ class App extends Component {
           <Stack.Screen
             name='Login'
             component={LoginScreen}
+            options = {{
+              title: 'Login',
+              headerStyle: {
+                backgroundColor: 'beige'
+              }
+            }}
           />
 
           <Stack.Screen
@@ -35,6 +41,12 @@ class App extends Component {
           <Stack.Screen
             name = 'Profile Picture Upload'
             component = {ProfileScreen}
+            options = {{
+              title: 'Picture Upload',
+              headerStyle: {
+                backgroundColor: 'beige'
+              }
+            }}
           />
           <Stack.Screen
             name='Spacebook'
@@ -51,5 +63,3 @@ class App extends Component {
 }
 
 export default App
-
-// sdf

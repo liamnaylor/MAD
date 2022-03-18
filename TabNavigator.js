@@ -59,15 +59,33 @@ const TabNav = () => {
         <Tab.Screen
             name='Search'
             component={FriendSearchScreen}
+            options = {{
+              title: 'Search',
+              headerStyle: {
+                backgroundColor: 'beige'
+              }
+            }}
           />
         <Tab.Screen
             name='Your Details'
             component={ProfileScreenMenu}
+            options = {{
+              title: 'Profile',
+              headerStyle: {
+                backgroundColor: 'beige'
+              }
+            }}
         />
 
         <Tab.Screen
             name='Post'
             component={PostScreen}
+            options = {{
+              title: 'Post',
+              headerStyle: {
+                backgroundColor: 'beige'
+              }
+            }}
         />
     </Tab.Navigator>
   )
