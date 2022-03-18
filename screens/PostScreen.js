@@ -171,6 +171,10 @@ class PostScreen extends Component {
       draftText = await AsyncStorage.getItem('@text')
     }
 
+    help = () => {
+      alert('To edit one of your posts, type a message and press "Submit Changes" ')
+    }
+
     render () {
       if (this.state.isLoading) {
         return (
@@ -190,10 +194,10 @@ class PostScreen extends Component {
 
                       <TouchableOpacity
                         style = {styles.backButton}
-                        title = "Back"
-                        onPress={() => this.props.navigation.goBack()}
+                        title = 'Help'
+                        onPress={() => this.help()}
                       >
-                        <Text>Back</Text>
+                        <Text>Help</Text>
                       </TouchableOpacity>
                         <TextInput
                             style ={styles.textIn}
@@ -225,11 +229,6 @@ class PostScreen extends Component {
                                     <Text style = {{ marginTop: 50, fontWeight: 'bold', fontSize: 16, fontFamily: 'helvetica' }}>{item.text}</Text>
                                     <Text>Likes: {item.numLikes}</Text>
                                     <Text style={{ marginBottom: 10 }}></Text>
-                                    <TextInput
-                                        style = {styles.textIn}
-                                        placeholder="Edit Post"
-                                        onChangeText={(text) => this.setState({ text })}
-                                    />
                                     <TouchableOpacity
                                         style={styles.button}
                                         title="Submit Changes"
