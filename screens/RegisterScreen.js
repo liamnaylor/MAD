@@ -18,6 +18,9 @@ class RegisterScreen extends Component {
       password: ''
     }
   }
+  /*
+  Reg t
+  */
 
     reg= () => {
       return fetch('http://localhost:3333/api/1.0.0/user', {
@@ -32,7 +35,7 @@ class RegisterScreen extends Component {
             alert('You have successfully created an account')
             return response.json()
           } else if (response.status === 400) {
-            throw 'Failed validation'
+            throw 'Failed to create account'
           } else {
             throw 'Something went wrong'
           }

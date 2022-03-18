@@ -43,6 +43,12 @@ class PostScreen extends Component {
         })
     }
 
+    /*
+    The methods in PostScreen include all actions that the user can complete involving their own posts.
+
+    getPosts is a method that is mounted immeadiately after the screen is loaded
+    */
+
     postText= async () => {
       const token = await AsyncStorage.getItem('@session_token')
       const user_id = await AsyncStorage.getItem('@user_id')
@@ -183,10 +189,7 @@ class PostScreen extends Component {
       if (this.state.isLoading) {
         return (
                 <View>
-                    <ActivityIndicator
-                        size="large"
-                        color="#00ff00"
-                    />
+                    <ActivityIndicator/>
                 </View>
         )
       } else {

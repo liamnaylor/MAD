@@ -163,7 +163,3 @@ const styles = StyleSheet.create({
 })
 
 export default LoginScreen
-
-// Login for Jon turner: Turner@Jon.com, 12345Jon
-// Login for Liam Naylor: 19074380@stu.mmu.ac.uk, hello12345
-// df

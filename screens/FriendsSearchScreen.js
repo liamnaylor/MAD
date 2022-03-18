@@ -46,10 +46,10 @@ class FriendSearchScreen extends Component {
         })
     }
 
-    getFlatListName (user_givenname, user_familyname) {
-      alert(user_givenname, user_familyname)
-    }
-    // The findFriends function retrieves the complete list of users
+    /*
+    The findFriends function retrieves the complete list of users based on the input that the user provides.
+    Currently, the app will retrieve all users based on any input of a key.
+    */
 
     findFriends= async (textToSearch) => {
       this.setState({ textToSearch })
@@ -79,6 +79,11 @@ class FriendSearchScreen extends Component {
           console.log(error)
         })
     }
+
+    /*
+    Add friend is a function that takes the user ID as a parameter and sends a post request to the recipient that matches
+    with the user ID parameter stated.
+    */
 
     addFriend=async (user_id) => {
       const value = await AsyncStorage.getItem('@session_token')

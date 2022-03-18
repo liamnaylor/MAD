@@ -35,6 +35,10 @@ class ProfileScreen extends Component {
     this.setState({ hasPermission: status === 'granted' })
   }
 
+  /*
+  The sendToServer and take picture methods are used to capture an image and send to the server.
+  */
+
   sendToServer = async (data) => {
     const user_id = await AsyncStorage.getItem('@user_id')
     const token = await AsyncStorage.getItem('@session_token')

@@ -8,6 +8,13 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, FlatList, ScrollView, TextInput, Image, SafeAreaView } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+/*
+This screen has been used to complete all functions regarding profile management
+
+All functions on this screen have been completed using Async Storage that was set during the login process and allows the
+user to view their details, update their details, view profile picture and capture a new profile picture.
+*/
+
 class ProfileScreenMenu extends Component {
   constructor (props) {
     super(props)
@@ -55,7 +62,6 @@ class ProfileScreenMenu extends Component {
       this.unsubscribe = this.props.navigation.addListener('focus', () => {
         this.checkLoggedIn()
       })
-      this.retrieveUserDetails()
       this.retrievePhoto()
     }
 
@@ -173,6 +179,7 @@ class ProfileScreenMenu extends Component {
                         </View>
                         <View>
                             <TouchableOpacity
+                              style = {styles.getDetailsButton}
                               title = 'Get your Details'
                               onPress = {() => this.retrieveUserDetails()}
                             >
@@ -248,6 +255,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDCA1',
     borderWidth: 1
 
+  },
+  getDetailsButton: {
+    width: 200,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+    backgroundColor: '#DDDCA1',
+    flexDirection: 'row',
+    display: 'flex',
+    borderWidth: 1,
+    borderRadius: 50,
+    marginRight: 15
   },
 
   buttonUpload: {

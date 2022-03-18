@@ -66,7 +66,10 @@ class HomeScreen extends Component {
     user id that was set when logging in.
 
     A HTTP request is sent to the API using the fetch method and will fulfill the request based on the requirement that the user
-    is properly authenticated (using X-Authorization)
+    is properly authenticated (using X-Authorization).
+
+    Some methods in the application require parameters to be stated in the function definition. These are actions that concern
+    other users
     */
 
     getOtherUserPosts=async (user_id) => {
@@ -85,9 +88,8 @@ class HomeScreen extends Component {
 
           })
           console.log(responseJson)
-          if (response.status === 200) {
-            alert('Posts Successfully Retrieved, Scroll down to view them')
-          } else if (response.status === 404) {
+          alert('Posts Successfully Retrieved, Scroll down to view them')
+          if (responseJson.status === 404) {
             alert('Posts not found')
           }
         })
@@ -112,11 +114,7 @@ class HomeScreen extends Component {
             modalVisible: true
           })
           console.log(responseJson)
-          if (response.status === 200) {
-            alert('The post you have selected: ' + JSON.stringify(responseJson))
-          } else if (response.status === 400) {
-            alert('Invalid Request')
-          }
+          alert('The post you have selected: ' + JSON.stringify(responseJson))
         })
         .catch((error) => {
           console.log(error)
@@ -252,6 +250,10 @@ class HomeScreen extends Component {
             />
       )
     };
+    /*
+    Similarly to the get posts method, get friend requests retrieves all items for a specific user however will load
+    when the screen is loaded
+    */
 
     getFriendRequests=async () => {
       const token = await AsyncStorage.getItem('@session_token')
@@ -436,7 +438,7 @@ class HomeScreen extends Component {
 /*
 
 Style sheets have been implemented throughout the application to provide a unique formatting and appearance to the application
-and similar
+that has been called on throughout the render method.
 */
 const styles = StyleSheet.create({
   container: {
