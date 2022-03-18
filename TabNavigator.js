@@ -2,8 +2,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import ProfileScreenMenu from './screens/ProfileMenuScreen'
 import PostScreen from './screens/PostScreen'
 import FriendSearchScreen from './screens/FriendsSearchScreen'
-import React from 'react'
 import HomeScreen from './screens/HomeScreen'
+
+import Ionicons from 'react-native-vector-icons/Ionicons'
+
+import React from 'react'
 
 const Tab = createBottomTabNavigator()
 
@@ -14,7 +17,33 @@ const Tab = createBottomTabNavigator()
 
 const TabNav = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName
+            if (route.name === 'Home') {
+              iconName = focused
+                ? 'home'
+                : 'home-outline'
+            } else if (route.name === 'Your Details') {
+              iconName = focused
+                ? 'person-circle'
+                : 'person-circle-outline'
+            } else if (route.name === 'Search') {
+              iconName = focused
+                ? 'search-circle'
+                : 'search-circle-outline'
+            } else if (route.name === 'Post') {
+              iconName = focused
+                ? 'send'
+                : 'send-outline'
+            }
+            return <Ionicons name = {iconName} size = {size} color = {color}/>
+          },
+          tabBarActiveTintColor: 'green',
+          tabBarInactiveBackgroundColor: 'beige'
+        })}
+    >
         <Tab.Screen
             name = 'Home'
             component = {HomeScreen}
