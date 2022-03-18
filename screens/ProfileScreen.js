@@ -154,5 +154,3 @@ const styles = StyleSheet.create({
 
   }
 })
-
-// sdf

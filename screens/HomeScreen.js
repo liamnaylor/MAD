@@ -30,10 +30,11 @@ class HomeScreen extends Component {
   // all interaction regarding friends, friend requests and interaction with other user posts.
 
   // The componentDidMount function is a core function that will complete the specified function
-  // once the component has been mounted.
+  // once the component has been mounted. It calls both key get methods for friends and
+  // friend requests.
 
   componentDidMount () {
-    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+    this.unsubscribe = this.props.navigation.addListener('focus', () => {
       this.checkLoggedIn()
     })
     this.getFriendRequests()
@@ -41,8 +42,15 @@ class HomeScreen extends Component {
   }
 
   componentWillUnmount () {
-    this._unsubscribe()
+    this.unsubscribe()
   }
+  /*
+  The checkLoggedIn function acts checks that the session token is valid for the session
+  and will set the token that will be used by the other functions in the application.
+
+  This also means that if there is a null session token, the app isn't able to authenticate
+  the user and will then be taken back to the login page
+  */
 
     checkLoggedIn = async () => {
       const value = await AsyncStorage.getItem('@session_token')
@@ -52,6 +60,14 @@ class HomeScreen extends Component {
         this.props.navigation.navigate('Login')
       }
     }
+    /*
+    The method to retrieve user posts has been completed by stating the parameters in the brackets when defining the function.
+    The parameter that is called here is also used for the majority of functions that do not use the previously defined AsyncStorage
+    user id that was set when logging in.
+
+    A HTTP request is sent to the API using the fetch method and will fulfill the request based on the requirement that the user
+    is properly authenticated (using X-Authorization)
+    */
 
     getOtherUserPosts=async (user_id) => {
       const token = await AsyncStorage.getItem('@session_token')
@@ -69,7 +85,11 @@ class HomeScreen extends Component {
 
           })
           console.log(responseJson)
-          alert('Posts Successfully Retrieved, Scroll down to view them')
+          if (response.status === 200) {
+            alert('Posts Successfully Retrieved, Scroll down to view them')
+          } else if (response.status === 404) {
+            alert('Posts not found')
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -92,7 +112,11 @@ class HomeScreen extends Component {
             modalVisible: true
           })
           console.log(responseJson)
-          alert('The post you have selected: ' + JSON.stringify(responseJson))
+          if (response.status === 200) {
+            alert('The post you have selected: ' + JSON.stringify(responseJson))
+          } else if (response.status === 400) {
+            alert('Invalid Request')
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -103,6 +127,8 @@ class HomeScreen extends Component {
     // have posted onto the platform.
     // Calling the variables when defining the function ensures that information regarding posts is acted upon
     // dynamically
+
+    // These methods also provide confirmation alerts on whether the action has been completed or not.
 
     likePost=async (user_id, post_id) => {
       const token = await AsyncStorage.getItem('@session_token')
@@ -146,6 +172,13 @@ class HomeScreen extends Component {
           console.log(error)
         })
     }
+
+    /*
+    The logout method is present in all methods of the application and functions through the use of
+    AsyncStorage removing the token that was established when logging into the application.
+    The user will then be directed back to the login screen and will need to acquire a valid session token
+    through the login process
+    */
 
     logout = async () => {
       const token = await AsyncStorage.getItem('@session_token')
@@ -291,7 +324,7 @@ class HomeScreen extends Component {
     render () {
       return (
       // Flatlists have been used throughout this component to display each record that is stored in the api
-      // about the user including friends and outstanding friend requests.
+      // about the user including friends, outstanding friend requests and viewing posts from friends.
 
             <SafeAreaView style={styles.container}>
                 <ScrollView>
@@ -400,7 +433,11 @@ class HomeScreen extends Component {
       )
     }
 }
+/*
 
+Style sheets have been implemented throughout the application to provide a unique formatting and appearance to the application
+and similar
+*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
