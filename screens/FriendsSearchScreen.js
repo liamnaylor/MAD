@@ -169,6 +169,15 @@ class FriendSearchScreen extends Component {
       return (
               <SafeAreaView style = {styles.container}>
                 <ScrollView>
+                      <View style = {styles.logoutContainer}>
+                        <TouchableOpacity
+                            style={styles.navButton}
+                            title="Logout"
+                            onPress={() => this.logout()}
+                        >
+                          <Text>Logout</Text>
+                        </TouchableOpacity>
+                      </View>
                   <View>
                       <Text style = {styles.title}>Search for Friends</Text>
                       <TextInput
@@ -246,9 +255,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 20
   },
-  requestActions: {
+  logoutContainer: {
+    alignItems: 'flex-start'
+  },
+  navButton: {
+    width: 100,
+    height: 50,
+    marginTop: 5,
+    marginLeft: 50,
+    marginBottom: 20,
+    flexDirection: 'row',
     display: 'flex',
-    flexDirection: 'row'
+    backgroundColor: '#DDDCA1',
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: 'center'
   }
 })
 export default FriendSearchScreen

@@ -124,7 +124,15 @@ class ProfileScreen extends Component {
         )
       } else {
         return (
-          <ActivityIndicator/>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <ActivityIndicator/>
+          </View>
         )
       }
     }

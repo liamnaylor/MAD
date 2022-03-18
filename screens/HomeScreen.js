@@ -5,7 +5,7 @@
 /* eslint-disable no-undef */
 
 import React, { Component } from 'react'
-import { Text, ScrollView, Button, FlatList, StyleSheet, SafeAreaView, View, TouchableOpacity, Modal, Dimensions } from 'react-native'
+import { Text, ScrollView, FlatList, StyleSheet, SafeAreaView, View, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class HomeScreen extends Component {

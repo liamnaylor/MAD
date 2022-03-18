@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator()
 /* The app component is where all relevant screens are passed into to create the program flow
 
    The bottom tab navigation feature has been imported from the TabNavigator.js file and passed
-   as a stack screen
+   as a stack screen to continue flow of application
 */
 class App extends Component {
   render () {

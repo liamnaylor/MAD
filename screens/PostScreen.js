@@ -188,14 +188,29 @@ class PostScreen extends Component {
     render () {
       if (this.state.isLoading) {
         return (
-                <View>
-                    <ActivityIndicator/>
-                </View>
+          <View
+          style={{
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <ActivityIndicator/>
+      </View>
         )
       } else {
         return (
                 <SafeAreaView style={styles.container}>
                   <ScrollView>
+                      <View style = {styles.logoutContainer}>
+                        <TouchableOpacity
+                            style={styles.navButton}
+                            title="Logout"
+                            onPress={() => this.logout()}
+                        >
+                          <Text>Logout</Text>
+                        </TouchableOpacity>
+                      </View>
                     <View>
                       <Text style = {styles.title}>Post Something</Text>
 
@@ -374,6 +389,22 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 5,
     backgroundColor: '#DCDCDC'
+  },
+  logoutContainer: {
+    alignItems: 'flex-start'
+  },
+  navButton: {
+    width: 100,
+    height: 50,
+    marginTop: 5,
+    marginLeft: 50,
+    marginBottom: 20,
+    flexDirection: 'row',
+    display: 'flex',
+    backgroundColor: '#DDDCA1',
+    borderWidth: 1,
+    flex: 1,
+    justifyContent: 'center'
   }
 
 })

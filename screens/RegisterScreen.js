@@ -19,7 +19,9 @@ class RegisterScreen extends Component {
     }
   }
   /*
-  Reg t
+  Reg creates an account based on what input the user has entered into the system and will create an account based on this.
+
+  The text inputs in the render function are saved as state and is then converted into JSON format through use of stringify
   */
 
     reg= () => {
