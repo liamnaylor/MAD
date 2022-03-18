@@ -13,12 +13,14 @@ const Tab = createBottomTabNavigator()
 /* This function is used to create the tab navigation system to cycle between the implemented pages.
    It works by passing the relevant components and sorting them into separate screens similar to the
    stack navigator. The function also contains all styling methods for the navigator.
+
+   Ionicons have been used here to define the appearance of the various tabs.
 */
 
 const TabNav = () => {
   return (
     <Tab.Navigator
-        screenOptions={({ route }) => ({
+        screenOptions={ ({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName
             if (route.name === 'Home') {
@@ -47,6 +49,12 @@ const TabNav = () => {
         <Tab.Screen
             name = 'Home'
             component = {HomeScreen}
+            options = {{
+              title: 'Home',
+              headerStyle: {
+                backgroundColor: 'beige'
+              }
+            }}
         />
         <Tab.Screen
             name='Search'

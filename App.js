@@ -7,7 +7,11 @@ import { TabNav } from './TabNavigator'
 import ProfileScreen from './screens/ProfileScreen'
 
 const Stack = createNativeStackNavigator()
-/* The app component is where all relevant screens are passed into to create the program flow */
+/* The app component is where all relevant screens are passed into to create the program flow
+
+   The bottom tab navigation feature has been imported from the TabNavigator.js file and passed
+   as a stack screen to
+*/
 class App extends Component {
   render () {
     return (
@@ -21,15 +25,21 @@ class App extends Component {
           <Stack.Screen
             name='RegisterScreen'
             component={RegisterScreen}
-            options={{ title: 'Register' }}
+            options={{
+              title: 'Register',
+              headerStyle: {
+                backgroundColor: 'beige'
+              }
+            }}
           />
           <Stack.Screen
-            name = 'Profile'
+            name = 'Profile Picture Upload'
             component = {ProfileScreen}
           />
           <Stack.Screen
-            name='Home'
+            name='Spacebook'
             component={ TabNav }
+            options = {{ headerShown: false }}
           />
 
         </Stack.Navigator>

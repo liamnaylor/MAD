@@ -114,6 +114,7 @@ class ProfileScreen extends Component {
                 <Text style={styles.text}> Take Photo </Text>
               </TouchableOpacity>
             </View>
+            <View style = {styles}/>
           </Camera>
         </View>
         )
@@ -147,7 +148,10 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    color: 'white'
+    color: 'white',
+    paddingHorizontal: 100,
+    textAlign: 'center'
+
   }
 })
 

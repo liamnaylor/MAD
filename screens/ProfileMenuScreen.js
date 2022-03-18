@@ -166,21 +166,18 @@ class ProfileScreenMenu extends Component {
                             <TouchableOpacity
                                 style = {styles.buttonUpload}
                                 title="Upload Profile Picture Here"
-                                onPress={() => this.props.navigation.navigate('Profile')}
+                                onPress={() => this.props.navigation.navigate('Profile Picture Upload')}
                             >
                                 <Text>Upload New Profile Picture here</Text>
                             </TouchableOpacity>
                         </View>
                         <View>
-                            <FlatList
-                                data={this.state.userDetails}
-                                renderItem={({ item }) => (
-                                    <View>
-                                        <Text>{item.first_name} {item.last_name}</Text>
-                                    </View>
-                                )}
-                                keyExtractor={(user) => user.user_id.toString()}
-                            />
+                            <TouchableOpacity
+                              title = 'Get your Details'
+                              onPress = {() => this.retrieveUserDetails()}
+                            >
+                              <Text>Get Your Details</Text>
+                            </TouchableOpacity>
                         </View>
 
                         <View>

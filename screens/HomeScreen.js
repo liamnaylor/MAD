@@ -295,8 +295,7 @@ class HomeScreen extends Component {
 
             <SafeAreaView style={styles.container}>
                 <ScrollView>
-                    <View>
-                        <Text style={styles.title}>Welcome to Spacebook</Text>
+                      <View style = {styles.logoutContainer}>
                         <TouchableOpacity
                             style={styles.navButton}
                             title="Logout"
@@ -304,6 +303,9 @@ class HomeScreen extends Component {
                         >
                           <Text>Logout</Text>
                         </TouchableOpacity>
+                      </View>
+                    <View>
+                        <Text style={styles.title}>Welcome to Spacebook</Text>
                     </View>
                     <View>
                         <FlatList
@@ -415,9 +417,11 @@ const styles = StyleSheet.create({
 
   postContainer: {
     backgroundColor: '#FFFFFF',
+    flex: 1,
     borderWidth: 1,
     paddingLeft: 8,
-    paddingStart: 5
+    paddingStart: 5,
+    justifyContent: 'space-evenly'
   },
   getPostButton: {
     width: 200,
@@ -506,8 +510,6 @@ const styles = StyleSheet.create({
   navButton: {
     width: 100,
     height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
     marginTop: 5,
     marginLeft: 50,
     flexDirection: 'row',
@@ -535,6 +537,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontStyle: 'italic',
     marginTop: 5
+  },
+  logoutContainer: {
+    flex: 1,
+    alignItems: 'flex-start'
   }
 
 })

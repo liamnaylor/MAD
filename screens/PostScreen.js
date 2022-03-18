@@ -129,7 +129,11 @@ class PostScreen extends Component {
         .then((response) => {
           console.log(response)
           this.getPosts()
-          alert('Your Post has been removed')
+          if (response.status === 200) {
+            alert('Your Post has been removed')
+          } else if (response.status === 400) {
+            alert('You cannot delete a post that has already been liked')
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -172,7 +176,7 @@ class PostScreen extends Component {
     }
 
     help = () => {
-      alert('To edit one of your posts, type a message and press "Submit Changes" ')
+      alert('To edit one of your posts, type a message and press "Submit Changes" on the post you want to change')
     }
 
     render () {
