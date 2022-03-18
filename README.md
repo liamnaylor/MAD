@@ -13,5 +13,3 @@ there are however several elements that cannot styled as it would require user_i
 be declared as variables rather than objects for use. 
 
 The eslint Visual Studio Code extension was used to automatically scan through the code to format.
-
-NOTE: THE DECLINE FRIEND REQUEST FUNCTION IS WORKING PROPERLY HOWEVER FORGOT TO SHOW ON THE SCREENCAST.
