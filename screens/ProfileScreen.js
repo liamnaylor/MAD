@@ -29,6 +29,10 @@ class ProfileScreen extends Component {
       this.props.navigation.navigate('Login')
     }
   }
+  /*
+  component did mount in this circumstance is used to retrieve the permissions needed for the camera to function
+  using an async method
+  */
 
   async componentDidMount () {
     const { status } = await Camera.requestCameraPermissionsAsync()
@@ -37,6 +41,9 @@ class ProfileScreen extends Component {
 
   /*
   The sendToServer and take picture methods are used to capture an image and send to the server.
+
+  blob is the collection of large data that is storing the image taken as a singular object for
+  the api to store on its server.
   */
 
   sendToServer = async (data) => {
@@ -57,7 +64,6 @@ class ProfileScreen extends Component {
       .then((response) => {
         console.log('Picture added', response)
         alert('You have uploaded a new profile picture successfully')
-        this.retrievePhoto()
       })
       .catch((err) => {
         console.log('I am sorry, there is an issue with the image you are attempting to upload.', err)
@@ -73,31 +79,6 @@ class ProfileScreen extends Component {
         }
         await this.camera.takePictureAsync(options)
       }
-    }
-
-    retrievePhoto=async () => {
-      const token = await AsyncStorage.getItem('@session_token')
-      const user_id = await AsyncStorage.getItem('@user_id')
-      return fetch('http://localhost:3333/api/1.0.0/user/' + user_id + '/photo', {
-        method: 'GET',
-        headers: {
-          'X-Authorization': token,
-          'Content-Type': 'image/png'
-        }
-      })
-        .then((res) => {
-          return res.blob()
-        })
-        .then((resBlob) => {
-          const data = URL.createObjectURL(resBlob)
-          this.setState({
-            photo: data,
-            isLoading: false
-          })
-        })
-        .catch((error) => {
-          console.log('Error Occurred', error)
-        })
     }
 
     render () {
